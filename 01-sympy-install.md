@@ -46,9 +46,20 @@ Integral(exp(x)*cos(x), x)
 Eq(Integral(exp(x)*cos(x), x), exp(x)*sin(x)/2 + exp(x)*cos(x)/2)
 ~~~
 
+### 쥬피터 노트북에서 심파이 
 
+`init_printing(use_latex='mathjax')` 설정을 쥬피터 노트북을 통해 설정하게 되면 위와 같은 텍스트 출력수식이 아닌 
+수학책에 나오는 수식이 표현된다.
 
+~~~ {.python}
+init_printing(use_latex='mathjax')
+from sympy import *
+x = symbols('x')
+a = Integral(cos(x)*exp(x), x)
+a
+Eq(a, a.doit())
+~~~
 
-
+$\int e^x cos(x) dx = \frac{e^x}{2} sin(x) +  \frac{e^x}{2} cos(x)$
 
 

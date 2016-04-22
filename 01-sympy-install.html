@@ -57,6 +57,15 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 Integral(exp(x)*cos(x), x)
 &gt;&gt;&gt; Eq(a, a.doit())
 Eq(Integral(exp(x)*cos(x), x), exp(x)*sin(x)/2 + exp(x)*cos(x)/2)</code></pre>
+<h3 id="쥬피터-노트북에서-심파이">쥬피터 노트북에서 심파이</h3>
+<p><code>init_printing(use_latex='mathjax')</code> 설정을 쥬피터 노트북을 통해 설정하게 되면 위와 같은 텍스트 출력수식이 아닌 수학책에 나오는 수식이 표현된다.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">init_printing(use_latex<span class="op">=</span><span class="st">&#39;mathjax&#39;</span>)
+<span class="im">from</span> sympy <span class="im">import</span> <span class="op">*</span>
+x <span class="op">=</span> symbols(<span class="st">&#39;x&#39;</span>)
+a <span class="op">=</span> Integral(cos(x)<span class="op">*</span>exp(x), x)
+a
+Eq(a, a.doit())</code></pre></div>
+<p><span class="math inline">\(\int e^x cos(x) dx = \frac{e^x}{2} sin(x) + \frac{e^x}{2} cos(x)\)</span></p>
         </div>
       </div>
       </article>
