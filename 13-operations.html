@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="generator" content="pandoc">
+    <title>Software Carpentry: </title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/swc.css" />
+    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
+    <meta charset="UTF-8" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body class="lesson">
+    <div class="container card">
+      <div class="banner">
+        <a href="http://software-carpentry.org" title="Software Carpentry">
+          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" />
+        </a>
+      </div>
+      <article>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+                    <h1 class="title"></h1>
+          <h2 id="기본-연산">기본 연산</h2>
+<p>심파이에서 표현식을 조작하는데 필요한 가장 기본적인 연산을 다룬다. 고급 연산에 대해서는 <a href="http://docs.sympy.org/latest/tutorial/manipulation.html#tutorial-manipulation">advanced expression manipulation</a>절에서 다뤄진다.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> sympy <span class="im">import</span> <span class="op">*</span>
+init_printing(use_unicode<span class="op">=</span><span class="va">True</span>)
+x, y, z <span class="op">=</span> symbols(<span class="st">&#39;x y z&#39;</span>)</code></pre></div>
+<h3 id="대입">대입</h3>
+<p>수학 표현식으로 수행하고자 하는 가장 일반적인 것중 하나가 대입이다. 대입은 표현식의 어떤 인스턴스를 다른 어떤 것으로 바꾼다. <code>subs</code> 메쏘드를 사용해서 이런 작업을 수행한다. 예를 들어:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> cos(x) <span class="op">+</span> <span class="dv">1</span>
+expr.subs(x, y)</code></pre></div>
+<p><span class="math display">\[\cos{\left (y \right )} + 1\]</span></p>
+<p>대입은 다음 두가지 중 한가지 이유 때문에 이루어진다:</p>
+<ol style="list-style-type: decimal">
+<li>특정 지점에 표현식을 평가한다. 예를 들어, 표현식이 <code>cos(x) + 1</code>이고, <code>x = 0</code> 지점에서 평가하고자 하는 경우, <code>cos(0) + 1</code>은 2가 된다.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr.subs(x, <span class="dv">0</span>)</code></pre></div>
+<p><span class="math display">\[2\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>하위 표현식을 또다른 하위 표현식으로 교체한다. 이런 작업을 수행하는 이유가 두가지 있다. 첫번째로 어떤 대칭을 갖는 표현식을 만들어 내는 경우다. 예를 들어, <span class="math inline">\(x^{x^{x^{x}}}\)</span>. 이것을 만들어 내려면, <code>x**y</code>로 시작해서 <code>y</code>를 <code>x**y</code>로 치환한다. 그러고 나면, <code>x**(x**y)</code>를 얻게 된다. 새로운 표현식의 <code>y</code>를 <code>x**x</code>로 치환하면, <code>x**(x**(x**x))</code>를 얻게되는데, 기대했던 표현식이 바로 이것이다.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> x <span class="op">**</span> y
+expr</code></pre></div>
+<p><span class="math display">\[x^{y}\]</span></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> expr.subs(y, x<span class="op">**</span>y)
+expr</code></pre></div>
+<p><span class="math display">\[x^{x^{y}}\]</span></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> expr.subs(y, x<span class="op">**</span>x)
+expr</code></pre></div>
+<p><span class="math display">\[x^{x^{x^{x}}}\]</span></p>
+<p>두번째 경우는 매우 제어된 단순화를 수행하고자 하거나 아마도 심파이에서 다른 방법으로 잘 되지 않는 경우가 이에 해당된다. 예를 들어, <span class="math inline">\(sin(2x) + cos(2x)\)</span> 표현식이 있는데, <span class="math inline">\(sin(2x)\)</span>를 <span class="math inline">\(2sin(x)cos(x)\)</span>로 치환하고자 한다고 가정하자. 나중에 배우게 되겠지만, <code>expand_trig</code> 함수가 이런 작업을 수행하는 역할을 한다. 하지만, 이 함수는 <span class="math inline">\(cos(2x)\)</span>를 전개도 함께 하는데, 이는 원하는 바가 아니다. 이와 같은 정교한 단순화를 수행하는 방법이 있고, <a href="http://docs.sympy.org/latest/tutorial/manipulation.html#tutorial-manipulation">advanced expression manipulation</a>절에서 일부 학습을 하겠지만, 쉬운 방법이 <span class="math inline">\(sin(2x)\)</span>를 <span class="math inline">\(2sin(x)cos(x)\)</span>로 치환하는 것이다.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> sin(<span class="dv">2</span><span class="op">*</span>x) <span class="op">+</span> cos(<span class="dv">2</span><span class="op">*</span>x)
+expand_trig(expr)</code></pre></div>
+<p><span class="math display">\[2 \sin{\left (x \right )} \cos{\left (x \right )} + 2 \cos^{2}{\left (x \right )} - 1\]</span></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr.subs(sin(<span class="dv">2</span><span class="op">*</span>x), <span class="dv">2</span><span class="op">*</span>sin(x)<span class="op">*</span>cos(x))</code></pre></div>
+<p><span class="math display">\[2 \sin{\left (x \right )} \cos{\left (x \right )} + \cos{\left (2 x \right )}\]</span></p>
+<p><code>subs</code> 메쏘드에 관해 주목할 점이 두가지 있다. 먼저 <code>subs</code> 메쏘드는 새로운 표현식을 반환한다. 심파이 객체는 변경할 수 없다(immutable). <code>subs</code> 메쏘드는 결정된 곳에는 변경할 수 없음을 의미한다. 예를 들어:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> cos(x)
+expr.subs(x, <span class="dv">0</span>)</code></pre></div>
+<p><span class="math display">\[1\]</span></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr</code></pre></div>
+<p><span class="math display">\[\cos{\left (x \right )}\]</span></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x</code></pre></div>
+<p><span class="math display">\[x\]</span></p>
+<p><code>expr.subs(x, 0)</code> 표현식을 실행하면 <code>expr</code>은 변경되지 않는 것을 알게 된다. 사실, 심파이 표현식은 변경될 수 없기 때문에, 어떤 함수도 결정된 것을 변경하지 못한다. 모든 함수는 새로운 표현식을 반환한다.</p>
+<aside class="callout panel panel-info">
+<div class="panel-heading">
+<h3 id="급-조언"><span class="glyphicon glyphicon-pushpin"></span>급 조언</h3>
+</div>
+<div class="panel-body">
+<p>심파이 표현식은 변경할 수 없다. 어떤 함수도 결정된 것을 변경하지 못한다.</p>
+</div>
+</aside>
+<p>다수 치환을 한번에 수행하려면, <code>(old, new)</code> 짝꿍 리스트를 <code>subs</code> 메쏘드에 전달한다.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> x <span class="op">**</span> <span class="dv">3</span> <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>x<span class="op">*</span>y <span class="op">-</span> z
+expr.subs([(x,<span class="dv">2</span>), (y,<span class="dv">4</span>), (z,<span class="dv">0</span>)])</code></pre></div>
+<p><span class="math display">\[40\]</span></p>
+<p>한번에 유사한 대량 치환을 수행하는데 <strong><a href="https://en.wikipedia.org/wiki/List_comprehension">list comprehension</a></strong> 과 조합하는 것이 유용하다. 예를 들어, <span class="math inline">\(x^4 - 4x^3 + 4x^2 - 2x +3\)</span>이 있는데 모든 <span class="math inline">\(x\)</span> 인스턴스를 짝수 멱승을 갖는 <span class="math inline">\(y\)</span>로 바꿔서 <span class="math inline">\(y^4 - 4x^3 + 4y^2 - 2x +3\)</span>을 얻는다고 하자.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> x<span class="op">**</span><span class="dv">4</span> <span class="op">-</span> <span class="dv">4</span><span class="op">*</span>x<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">3</span>
+replacements <span class="op">=</span> [(x<span class="op">**</span>i, y<span class="op">**</span>i) <span class="cf">for</span> i <span class="op">in</span> <span class="bu">range</span>(<span class="dv">5</span>) <span class="cf">if</span> i <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>]
+expr.subs(replacements)</code></pre></div>
+<p><span class="math display">\[- 4 x^{3} - 2 x + y^{4} + 4 y^{2} + 3\]</span></p>
+<h2 id="문자열을-심파이-표현식으로-변환">문자열을 심파이 표현식으로 변환</h2>
+<p><code>sympify</code> 함수를 사용해서 문자열을 심파이 표현식으로 변환한다. (<code>sympify</code>로 <code>simplify</code>와 혼동하지 않는다.)</p>
+<p>예를 들어:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">str_expr <span class="op">=</span> <span class="st">&#39;x**2 + 3*x - 1/2&#39;</span>
+expr <span class="op">=</span> sympify(str_expr)
+expr</code></pre></div>
+<p><span class="math display">\[x^{2} + 3 x - \frac{1}{2}\]</span></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr.subs(x,<span class="dv">2</span>)</code></pre></div>
+<p><span class="math display">\[\frac{19}{2}\]</span></p>
+<blockquote>
+<h3 id="경고-sympify는-eval을-사용한다.-정제되지-않는-입력값에-사용하지-마라">경고: <code>sympify</code>는 <code>eval</code>을 사용한다. 정제되지 않는 입력값에 사용하지 마라!</h3>
+</blockquote>
+<h3 id="evalf">evalf</h3>
+<p>수치 표현식을 부동소수점 숫자로 평가하는데, <code>evalf</code> 메쏘드를 사용한다.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> sqrt(<span class="dv">8</span>)
+expr.evalf()</code></pre></div>
+<p><span class="math display">\[2.82842712474619\]</span></p>
+<p>심파이를 사용해서 임의 정밀도를 갖도록 표현식을 평가할 수 있다. 기본디폴트 설정으로 15자리 정밀도가 사용되지만, <code>evalf</code> 함수에 인자로 임의 숫자를 넘길 수도 있다. <span class="math inline">\(\pi\)</span>에 대해 100자리 정밀도로 계산해 보자.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">pi.evalf(<span class="dv">100</span>)</code></pre></div>
+<p><span class="math display">\[3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117068\]</span></p>
+<p>수치적으로 해당 지점에 기호를 갖는 표현식을 평가하려면, <code>subs</code> 다음에 <code>evalf</code> 메쏘드를 사용한다. 하지만 <code>subs</code> 플래그(<code>Symbol: point</code> 짝꿍 딕셔너리)를 사용해서 <code>evalf</code> 메쏘드에 치환을 전달하는 것이 수치적으로 안정성이 높고 더 효율적이다.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> cos(<span class="dv">2</span><span class="op">*</span>x)
+expr.evalf(subs<span class="op">=</span>{x: <span class="fl">2.4</span>})</code></pre></div>
+<p><span class="math display">\[0.0874989834394464\]</span></p>
+<p>종종 표현식이 평가된 뒤에 남은 정도보다 더 적은 반올림 오차가 있는 경우가 있다. 그런 숫자는 <code>chop</code> 플래그를 <code>True</code>로 설정해서 사용자의 판단하에 제거할 수도 있다.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">one <span class="op">=</span> cos(<span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> sin(<span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span>
+(one <span class="op">-</span><span class="dv">1</span>).evalf()</code></pre></div>
+<p><span class="math display">\[-4.0 \cdot 10^{-124}\]</span></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">(one <span class="op">-</span> <span class="dv">1</span>).evalf(chop<span class="op">=</span><span class="va">True</span>)</code></pre></div>
+<p><span class="math display">\[0\]</span></p>
+<h3 id="lambdify">lambdify</h3>
+<p><code>subs</code>와 <code>evalf</code>메쏘드는 간단한 평가를 수행할 때 좋지만, 다수 지점에서 표현식을 평가할 경우에는 좀더 효율적인 방식이 존재한다. 예를 들어, 수천개 지점에서 표현식을 평가하고자 한다면, 심파이를 사용하게 되면 필요로 하는 것보다 훨씬더 느리게 된다. 특히, 컴퓨터 정밀도에 대해 관여를 하는 경우 더욱 그렇다. 대신에 <a href="http://www.numpy.org/">NumPy</a>와 <a href="http://www.scipy.org/">SciPy</a> 같은 라이브러리를 사용한다.</p>
+<p>심파이 표현식을 수치적으로 평가되는 표현식으로 변환하는 가장 쉬운 방식이 <code>lambdify</code> 함수를 사용하는 것이다. <code>lambdify</code> 함수는 <code>lambda</code> 함수처럼 동작한다. 차이점은 심파이 명칭을 해당 수치 라이브러리, 보통 넘파이 명칭으로 변환하는 것이 다르다. 예를 들어:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> numpy
+a <span class="op">=</span> numpy.arange(<span class="dv">10</span>)
+expr <span class="op">=</span> sin(x)
+f <span class="op">=</span> lambdify(x, expr, <span class="st">&quot;numpy&quot;</span>)
+f(a)</code></pre></div>
+<pre><code>array([ 0.        ,  0.84147098,  0.90929743,  0.14112001, -0.7568025 ,
+       -0.95892427, -0.2794155 ,  0.6569866 ,  0.98935825,  0.41211849])</code></pre>
+<p>넘파이가 아닌 다른 라이브러리를 사용할 수도 있다. 예를 들어, 표준 수학 라이브러리를 사용하는 경우, <code>math</code>를 사용한다.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f <span class="op">=</span> lambdify(x, expr, <span class="st">&quot;math&quot;</span>)
+f(<span class="fl">0.1</span>)</code></pre></div>
+<p><span class="math display">\[0.0998334166468\]</span></p>
+<p>심파이가 알지 못하는 수치 라이브러리를 <code>lambdify</code>로 사용하는 경우, <code>sympy_name:numerical_function</code> 딕셔너리 쌍으로 전달한다. 예를 들어:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="kw">def</span> mysin(x):
+    <span class="co">&quot;&quot;&quot;</span>
+<span class="co">    내가 정의한 사인 함수. 작은 x 값에만 정확하게 계산된다.</span>
+<span class="co">    &quot;&quot;&quot;</span>
+    <span class="cf">return</span> x
+
+f <span class="op">=</span> lambdify(x, expr, {<span class="st">&quot;sin&quot;</span>:mysin})
+f(<span class="fl">0.1</span>)</code></pre></div>
+<p><span class="math display">\[0.1\]</span></p>
+        </div>
+      </div>
+      </article>
+      <div class="footer">
+        <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
+        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/lesson-template">Source</a>
+        <a class="label swc-blue-bg" href="mailto:admin@software-carpentry.org">Contact</a>
+        <a class="label swc-blue-bg" href="LICENSE.html">License</a>
+      </div>
+    </div>
+    <!-- Javascript placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+  </body>
+</html>

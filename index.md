@@ -24,6 +24,7 @@ title: 기호 수학(Symbolic Math)
 |------------------------|---------------------------|
 | [소개](11-intro.html) |[Introduction](http://docs.sympy.org/latest/tutorial/intro.html)|
 | [Gotcha](12-gotcha.html) |[Gotchas](http://docs.sympy.org/latest/tutorial/gotchas.html)|
+| [기본 연산](13-operations.html) |[Basic Operations](http://docs.sympy.org/latest/tutorial/basic_operations.html)|
 
 [^sympy-tutorial]: [SymPy Tutorial](http://docs.sympy.org/latest/tutorial/)
 
