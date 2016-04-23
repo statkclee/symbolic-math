@@ -15,8 +15,18 @@ title: 기호 수학(Symbolic Math)
 
 ## 학습 목차
 
-1.  [심파이 설치](01-sympy-install.html)
-2.  [미적분학](02-xxx.html)
+1. [수학의 역사](01-history.html)
+2. [심파이 설치](02-sympy-install.html)
+3. [미적분학](02-xxx.html)
+
+
+컴퓨터를 단순 계산이 아닌 대수(algebra), 기호 수학(symbolic math) 작업을 수행하는데,
+파이썬 심파이를 사용한다. 파이썬 심파이를 명령라인 인터페이스만 활용할 경우 여러가지 불편함이 있고,
+생각보다 생산성이 높지 않아 최근에 개발된 [쥬피터 노트북](http://jupyter.org/)을 사용한다.
+
+과학 컴퓨팅을 위해 다양한 파이썬 팩키지와 개발환경을 통합해서 설정을 이미 맞춰놓은 
+[아나콘다](https://www.continuum.io/)를 [다운로드](https://www.continuum.io/downloads) 받아 
+클릭만하면 바로 과학 컴퓨팅 분석 작업 혹은 응용프로그램 개발에 착수할 수 있다.
 
 
 > ## 이제는 웹에서도 수학을 유창하게 말할 수 있어요 !!! {.callout}

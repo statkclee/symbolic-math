@@ -63,3 +63,17 @@ Eq(a, a.doit())
 $\int e^x cos(x) dx = \frac{e^x}{2} sin(x) +  \frac{e^x}{2} cos(x)$
 
 
+### 쥬피터 노트북 작업 디렉토리 설정
+
+쥬피터 노트북을 기본 설정으로 시작할 경우 작업하고자 하는 디렉토리와 차이가 나는 경우가 있다.
+윈도우에서 쥬피터 노트북 작업환경을 설정할 경우 쥬피터 노트북 실행 버튼위에 마우스를 올리고 우클릭해서
+**속성** 을 선택해서 속성창에서 시작 위치를 작업 작업디렉토리로 설정한다.
+
+<img src="fig/jupyter-working-directory-setting.png" alt="쥬피터 노트북 작업 디렉토리 설정" width="50%" />
+
+리눅스나 맥의 경우는 더욱 단순한다. `ipython notebook --notebook-dir=` 명령어에 작업 디렉토리를 인자로 넣어준다.
+작업디렉토리가 `C:\Users\KwangChun\docs\symbolic-math`으로 설정했는데 본인 환경에 맞춰 설정한다.
+
+~~~ {.python}
+$ ipython notebook --notebook-dir=C:\Users\KwangChun\docs\symbolic-math
+~~~
