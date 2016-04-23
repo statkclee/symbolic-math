@@ -23,6 +23,7 @@ title: 기호 수학(Symbolic Math)
 |   한국어(Korean)      |    영어(English)            |
 |------------------------|---------------------------|
 | [소개](11-intro.html) |[Introduction](http://docs.sympy.org/latest/tutorial/intro.html)|
+| [Gotcha](12-gotcha.html) |[Gotchas](http://docs.sympy.org/latest/tutorial/gotchas.html)|
 
 [^sympy-tutorial]: [SymPy Tutorial](http://docs.sympy.org/latest/tutorial/)
 
