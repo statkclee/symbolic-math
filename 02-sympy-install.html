@@ -34,10 +34,15 @@
 </div>
 <div class="panel-body">
 <ul>
-<li>심파이를 설치한다.</li>
+<li>인터넷이 연결된 컴퓨터에서 직접 심파이를 경험한다.</li>
+<li>심파이를 개인 컴퓨터에 설치한다.</li>
+<li>심파이 개발환경을 쥬피터에 맞춰 최적화한다.</li>
 </ul>
 </div>
 </section>
+<h3 id="파이썬-심파이-인터넷-개발-환경">파이썬 심파이 인터넷 개발 환경</h3>
+<p><a href="http://live.sympy.org/">심파이 라이브!</a> 환경은 인터넷이 연결된 웹브라우져에서 바로 수학객체를 기호로 다룰 수 있는 환경을 제공한다. 파이썬 심파이를 사전에 맛볼 수 있다.</p>
+<p><img src="fig/sympy-live.png" alt="쥬피터 라이브" width="50%" /></p>
 <h3 id="파이썬-심파이-설치">파이썬 심파이 설치</h3>
 <p>심파이(Sympy)를 설치하는 다양한 방법이 존재한다. 우분투 운영체제에서 파이썬을 설치하는 방법은 먼저 <code>python-pip</code> 팩키지 설치 관리자를 설치하고 <code>pip install</code> 명령어를 통해 <code>sympy</code>를 설치한다.</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">vagrant@vagrant<span class="op">-</span>ubuntu<span class="op">-</span>trusty<span class="dv">-64</span>:<span class="op">~</span>$ sudo apt<span class="op">-</span>get install python<span class="op">-</span>pip
@@ -71,6 +76,17 @@ Eq(a, a.doit())</code></pre></div>
 <p><img src="fig/jupyter-working-directory-setting.png" alt="쥬피터 노트북 작업 디렉토리 설정" width="50%" /></p>
 <p>리눅스나 맥의 경우는 더욱 단순한다. <code>ipython notebook --notebook-dir=</code> 명령어에 작업 디렉토리를 인자로 넣어준다. 작업디렉토리가 <code>C:\Users\KwangChun\docs\symbolic-math</code>으로 설정했는데 본인 환경에 맞춰 설정한다.</p>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">$ ipython notebook <span class="op">--</span>notebook<span class="op">-</span><span class="bu">dir</span><span class="op">=</span>C:<span class="op">\</span>Users<span class="op">\</span>KwangChun<span class="op">\</span>docs<span class="op">\</span>symbolic<span class="op">-</span>math</code></pre></div>
+<h3 id="쥬피터-노트북을-마크다운으로-변환-nbconvert-to-markdown">쥬피터 노트북을 마크다운으로 변환 <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></h3>
+<p>아이파이썬 노트북을 마크다운으로 변환할 경우 <code>ipython nbconvert</code>가 명령어가 되며, 변환할 대상 노트북을 인자 넣고 <code>01-numpy.ipynb</code> <code>--to</code> 에 마크다운으로 명기한다.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">$ ipython nbconvert <span class="dv">01</span><span class="op">-</span>numpy.ipynb <span class="op">--</span>to markdown</code></pre></div>
+<p><code>ipython</code> 대신에 <code>jupyter</code> 를 향후 사용한다. 이유는 <code>ipython nbconvert is deprecated and will be removed in future versions.</code> 조만간 사용이 정지될 것이기 때문이다.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">$ jupyter nbconvert <span class="dv">01</span><span class="op">-</span>numpy.ipynb <span class="op">--</span>to markdown</code></pre></div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://ipython.org/ipython-doc/3/notebook/nbconvert.html">Converting notebooks to other formats</a><a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
         </div>
       </div>
       </article>

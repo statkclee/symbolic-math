@@ -16,9 +16,11 @@ title: 기호 수학(Symbolic Math)
 ## 학습 목차
 
 1. [수학의 역사](01-history.html)
-2. [심파이 설치](02-sympy-install.html)
-3. [미적분학](02-xxx.html)
+1. [심파이 설치](02-sympy-install.html)
+1. 심파이 사용지침서 [^sympy-tutorial]
+    1. [소개](11-intro.html)
 
+[^sympy-tutorial]: [SymPy Tutorial](http://docs.sympy.org/latest/tutorial/)
 
 컴퓨터를 단순 계산이 아닌 대수(algebra), 기호 수학(symbolic math) 작업을 수행하는데,
 파이썬 심파이를 사용한다. 파이썬 심파이를 명령라인 인터페이스만 활용할 경우 여러가지 불편함이 있고,

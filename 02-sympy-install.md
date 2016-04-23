@@ -7,7 +7,16 @@ minutes: 10
 
 > ## 학습목표 {.objectives}
 >
-> * 심파이를 설치한다.
+> * 인터넷이 연결된 컴퓨터에서 직접 심파이를 경험한다.
+> * 심파이를 개인 컴퓨터에 설치한다.
+> * 심파이 개발환경을 쥬피터에 맞춰 최적화한다.
+
+### 파이썬 심파이 인터넷 개발 환경
+
+[심파이 라이브!](http://live.sympy.org/) 환경은 인터넷이 연결된 웹브라우져에서 
+바로 수학객체를 기호로 다룰 수 있는 환경을 제공한다. 파이썬 심파이를 사전에 맛볼 수 있다.
+
+<img src="fig/sympy-live.png" alt="쥬피터 라이브" width="50%" />
 
 
 ### 파이썬 심파이 설치
@@ -76,4 +85,20 @@ $\int e^x cos(x) dx = \frac{e^x}{2} sin(x) +  \frac{e^x}{2} cos(x)$
 
 ~~~ {.python}
 $ ipython notebook --notebook-dir=C:\Users\KwangChun\docs\symbolic-math
+~~~
+
+### 쥬피터 노트북을 마크다운으로 변환 [^nbconvert-to-markdown]
+
+[^nbconvert-to-markdown]: [Converting notebooks to other formats](https://ipython.org/ipython-doc/3/notebook/nbconvert.html)
+
+아이파이썬 노트북을 마크다운으로 변환할 경우 `ipython nbconvert`가 명령어가 되며, 변환할 대상 노트북을 인자 넣고 `01-numpy.ipynb` `--to` 에 마크다운으로 명기한다.
+
+~~~ {.python}
+$ ipython nbconvert 01-numpy.ipynb --to markdown
+~~~
+
+`ipython` 대신에 `jupyter` 를 향후 사용한다. 이유는 `ipython nbconvert is deprecated and will be removed in future versions.` 조만간 사용이 정지될 것이기 때문이다.
+
+~~~ {.python}
+$ jupyter nbconvert 01-numpy.ipynb --to markdown
 ~~~
