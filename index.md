@@ -18,7 +18,11 @@ title: 기호 수학(Symbolic Math)
 1. [수학의 역사](01-history.html)
 1. [심파이 설치](02-sympy-install.html)
 1. 심파이 사용지침서 [^sympy-tutorial]
-    1. [소개](11-intro.html)
+    
+
+|   한국어(Korean)      |    영어(English)            |
+|------------------------|---------------------------|
+| [소개](11-intro.html) |[Introduction](http://docs.sympy.org/latest/tutorial/intro.html)|
 
 [^sympy-tutorial]: [SymPy Tutorial](http://docs.sympy.org/latest/tutorial/)
 
