@@ -26,6 +26,7 @@ title: 기호 수학(Symbolic Math)
 | [Gotcha](12-gotcha.html) |[Gotchas](http://docs.sympy.org/latest/tutorial/gotchas.html)|
 | [기본 연산](13-operations.html) |[Basic Operations](http://docs.sympy.org/latest/tutorial/basic_operations.html)|
 | [간략화](14-simplification.html) |[Simplification](http://docs.sympy.org/latest/tutorial/simplification.html)|
+| [미적분](15-calculus.html) |[Calculus](http://docs.sympy.org/latest/tutorial/calculus.html)|
 
 [^sympy-tutorial]: [SymPy Tutorial](http://docs.sympy.org/latest/tutorial/)
 
