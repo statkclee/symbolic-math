@@ -4,24 +4,24 @@
     <meta charset="utf-8">
     <meta name="generator" content="pandoc">
     <title>Software Carpentry: </title>
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
-    <link rel="stylesheet" type="text/css" href="css/swc.css" />
-    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
-    <meta charset="UTF-8" />
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/swc.css" />
+    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
+    <meta charset="UTF-8" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
   <body class="lesson">
     <div class="container card">
-      <div class="banner">
-        <a href="http://software-carpentry.org" title="Software Carpentry">
-          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" />
-        </a>
+      <div class="banner">
+        <a href="http://software-carpentry.org" title="Software Carpentry">
+          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" />
+        </a>
       </div>
       <article>
       <div class="row">
@@ -141,27 +141,52 @@ expr</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> exp(sin(x))
 expr.series(x, <span class="dv">0</span>, <span class="dv">4</span>)</code></pre></div>
 <p><span class="math display">\[1 + x + \frac{x^{2}}{2} + \mathcal{O}\left(x^{4}\right)\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"></code></pre></div>
+<p>마지막에 <span class="math inline">\(O\left (x^4\right )\)</span> 항은 <span class="math inline">\(x=0\)</span> 에서 란다우(Landau) 항을 나타낸다. (컴퓨터 과학의 빅오(Big O) 표기법과 혼동하지 말자. 일반적으로 <span class="math inline">\(x = \infty\)</span> 로 갈 때 란다우 항을 표현한다.) <span class="math inline">\(x^4\)</span> 보다 크거나 같은 거듭제곱항을 갖는 모든 <span class="math inline">\(x\)</span> 항이 빠지게 됨을 의미한다. 거듭제곱항은 <code>series</code> 외부에서 생성되고 조작되는데, 자동으로 고차 거듭제곱항을 흡수하는 성질이 있다.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">+</span> x<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> x<span class="op">**</span><span class="dv">6</span> <span class="op">+</span> O(x<span class="op">**</span><span class="dv">4</span>)</code></pre></div>
+<p><span class="math display">\[x + x^{3} + \mathcal{O}\left(x^{4}\right)\]</span></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x<span class="op">*</span>O(<span class="dv">1</span>)</code></pre></div>
+<p><span class="math display">\[\mathcal{O}\left(x\right)\]</span></p>
+<p>거듭제곱 항을 원치 않는 경우, <code>remove0</code> 메쏘드를 사용한다.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr.series(x, <span class="dv">0</span>, <span class="dv">4</span>).removeO()</code></pre></div>
+<p><span class="math display">\[\frac{x^{2}}{2} + x + 1\]</span></p>
+<p><code>o</code> 표기법은 0이 아닌 임의 극한점에도 사용가능하다.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">exp(x <span class="op">-</span> <span class="dv">6</span>).series(x, x0<span class="op">=</span><span class="dv">6</span>)</code></pre></div>
+<p><span class="math display">\[-5 + \frac{1}{2} \left(x - 6\right)^{2} + \frac{1}{6} \left(x - 6\right)^{3} + \frac{1}{24} \left(x - 6\right)^{4} + \frac{1}{120} \left(x - 6\right)^{5} + x + \mathcal{O}\left(\left(x - 6\right)^{6}; x\rightarrow6\right)\]</span></p>
+<h2 id="유한-차분">유한 차분</h2>
+<p>지금까지 해석적 미분과 원시함수형태 표현식을 살펴봤다. 닫힌 형식 표기법이 존재하지 않는 곡선, 혹은 함수값을 알지 못하는 곡선에 대한 미분을 추정하는 표현식을 다루고자 하면 어떨까? 한가지 접근법은 유한차분을 사용하는 것이다.</p>
+<p><code>Derivative</code> 인스턴스에 <code>as_finite_diff</code> 방법을 사용해서 임의 거듭제곱항에 근사값을 생성한다.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f <span class="op">=</span> Function(<span class="st">&#39;f&#39;</span>)
+dfdx <span class="op">=</span> f(x).diff(x)
+as_finite_diff(dfdx)</code></pre></div>
+<p><span class="math display">\[- f{\left (x - \frac{1}{2} \right )} + f{\left (x + \frac{1}{2} \right )}\]</span></p>
+<p>1차 미분으로 <code>x</code> 주변에서 근사했는데, 1 간격크기를 사용해서 동일거리에 값 매김되는 최소점을 사용했다. 임의 간격크기를 사용할 수도 있다(기호 표현식을 포함하는 것도 가능).</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f <span class="op">=</span> Function(<span class="st">&#39;f&#39;</span>)
+d2fdx2 <span class="op">=</span> f(x).diff(x, <span class="dv">2</span>)
+h <span class="op">=</span> Symbol(<span class="st">&#39;h&#39;</span>)
+as_finite_diff(d2fdx2, [<span class="op">-</span><span class="dv">3</span><span class="op">*</span>h, <span class="op">-</span>h, <span class="dv">2</span><span class="op">*</span>h])</code></pre></div>
+<p><span class="math display">\[\frac{1}{5 h^{2}} f{\left (- 3 h \right )} - \frac{1}{3 h^{2}} f{\left (- h \right )} + \frac{2}{15 h^{2}} f{\left (2 h \right )}\]</span></p>
+<p>가중치를 값매김하는데만 관심이 있다면, 수작업으로 다음과 같이 계산할 수도 있다:</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">finite_diff_weights(<span class="dv">2</span>,[<span class="op">-</span><span class="dv">3</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>],<span class="dv">0</span>)[<span class="op">-</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>]</code></pre></div>
+<p><span class="math display">\[\left [ \frac{1}{5}, \quad - \frac{1}{3}, \quad \frac{2}{15}\right ]\]</span></p>
+<p><code>finite_diff_weights</code>에서 반환되는 마지막 요소만 필요하다는데 주목한다. 이런 이유는 <code>finite_diff_weights</code>가 차수가 낮은 미분과 더 적은 점을 사용해서 가중치를 생성하기 때문이다. (좀더 자세한 정보는 <code>finite_diff_weights</code> 문서를 참고한다.)</p>
+<p><code>finite_diff_weights</code>를 직접적으로 사용하는 것이 복잡해 보이고, <code>Derivative</code> 인스턴스에서 동작하는 <code>as_finite_diff</code> 함수가 유연하지 못한 경우, 거듭제곱항과 x_list, y_list, x0를 인자로 받는 <code>apply_finite_diff</code>를 사용한다.</p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x_list <span class="op">=</span> [<span class="op">-</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>]
+y_list <span class="op">=</span> symbols(<span class="st">&#39;a b c&#39;</span>)
+apply_finite_diff(<span class="dv">1</span>, x_list, y_list, <span class="dv">0</span>)</code></pre></div>
+<p><span class="math display">\[- \frac{3 a}{20} - \frac{b}{4} + \frac{2 c}{5}\]</span></p>
         </div>
       </div>
       </article>
-      <div class="footer">
-        <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
-        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/lesson-template">Source</a>
-        <a class="label swc-blue-bg" href="mailto:admin@software-carpentry.org">Contact</a>
-        <a class="label swc-blue-bg" href="LICENSE.html">License</a>
+      <div class="footer">
+        <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
+        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/lesson-template">Source</a>
+        <a class="label swc-blue-bg" href="mailto:admin@software-carpentry.org">Contact</a>
+        <a class="label swc-blue-bg" href="LICENSE.html">License</a>
       </div>
     </div>
-    <!-- Javascript placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+    <!-- Javascript placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
     <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
   </body>
 </html>

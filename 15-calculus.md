@@ -228,7 +228,7 @@ print(expr)
 ```
 
     Integral(x**x, x)
-    
+
 
 
 ```python
@@ -479,42 +479,132 @@ $$1 + x + \frac{x^{2}}{2} + \mathcal{O}\left(x^{4}\right)$$
 
 
 
-
-```python
-
-```
-
-
-```python
-
-```
+마지막에 $O\left (x^4\right )$ 항은 $x=0$ 에서 란다우(Landau) 항을 나타낸다.
+(컴퓨터 과학의 빅오(Big O) 표기법과 혼동하지 말자. 일반적으로 $x = \infty$ 로 갈 때 란다우 항을 표현한다.)
+$x^4$ 보다 크거나 같은 거듭제곱항을 갖는 모든 $x$ 항이 빠지게 됨을 의미한다.
+거듭제곱항은 `series` 외부에서 생성되고 조작되는데, 자동으로 고차 거듭제곱항을 흡수하는 성질이 있다.
 
 
 ```python
-
+x + x**3 + x**6 + O(x**4)
 ```
+
+
+
+
+$$x + x^{3} + \mathcal{O}\left(x^{4}\right)$$
+
+
 
 
 ```python
-
+x*O(1)
 ```
+
+
+
+
+$$\mathcal{O}\left(x\right)$$
+
+
+
+거듭제곱 항을 원치 않는 경우, `remove0` 메쏘드를 사용한다.
 
 
 ```python
-
+expr.series(x, 0, 4).removeO()
 ```
+
+
+
+
+$$\frac{x^{2}}{2} + x + 1$$
+
+
+
+`o` 표기법은 0이 아닌 임의 극한점에도 사용가능하다.
 
 
 ```python
-
+exp(x - 6).series(x, x0=6)
 ```
+
+
+
+
+$$-5 + \frac{1}{2} \left(x - 6\right)^{2} + \frac{1}{6} \left(x - 6\right)^{3} + \frac{1}{24} \left(x - 6\right)^{4} + \frac{1}{120} \left(x - 6\right)^{5} + x + \mathcal{O}\left(\left(x - 6\right)^{6}; x\rightarrow6\right)$$
+
+
+
+## 유한 차분
+
+지금까지 해석적 미분과 원시함수형태 표현식을 살펴봤다.
+닫힌 형식 표기법이 존재하지 않는 곡선, 혹은 함수값을 알지 못하는 곡선에 대한 미분을 추정하는 표현식을 다루고자 하면 어떨까?
+한가지 접근법은 유한차분을 사용하는 것이다.
+
+`Derivative` 인스턴스에 `as_finite_diff` 방법을 사용해서 임의 거듭제곱항에 근사값을 생성한다.
 
 
 ```python
-
+f = Function('f')
+dfdx = f(x).diff(x)
+as_finite_diff(dfdx)
 ```
+
+
+
+
+$$- f{\left (x - \frac{1}{2} \right )} + f{\left (x + \frac{1}{2} \right )}$$
+
+
+
+1차 미분으로 `x` 주변에서 근사했는데, 1 간격크기를 사용해서 동일거리에 값 매김되는 최소점을 사용했다.
+임의 간격크기를 사용할 수도 있다(기호 표현식을 포함하는 것도 가능).
 
 
 ```python
-
+f = Function('f')
+d2fdx2 = f(x).diff(x, 2)
+h = Symbol('h')
+as_finite_diff(d2fdx2, [-3*h, -h, 2*h])
 ```
+
+
+
+
+$$\frac{1}{5 h^{2}} f{\left (- 3 h \right )} - \frac{1}{3 h^{2}} f{\left (- h \right )} + \frac{2}{15 h^{2}} f{\left (2 h \right )}$$
+
+
+
+가중치를 값매김하는데만 관심이 있다면, 수작업으로 다음과 같이 계산할 수도 있다:
+
+
+```python
+finite_diff_weights(2,[-3,-1,2],0)[-1][-1]
+```
+
+
+
+
+$$\left [ \frac{1}{5}, \quad - \frac{1}{3}, \quad \frac{2}{15}\right ]$$
+
+
+
+`finite_diff_weights`에서 반환되는 마지막 요소만 필요하다는데 주목한다.
+이런 이유는 `finite_diff_weights`가 차수가 낮은 미분과 더 적은 점을 사용해서 가중치를 생성하기 때문이다. (좀더 자세한 정보는 `finite_diff_weights` 문서를 참고한다.)
+
+`finite_diff_weights`를 직접적으로 사용하는 것이 복잡해 보이고, `Derivative` 인스턴스에서 동작하는 `as_finite_diff` 함수가 유연하지 못한 경우, 거듭제곱항과 x_list, y_list, x0를 인자로 받는 `apply_finite_diff`를 사용한다.
+
+
+```python
+x_list = [-3, 1, 2]
+y_list = symbols('a b c')
+apply_finite_diff(1, x_list, y_list, 0)
+```
+
+
+
+
+$$- \frac{3 a}{20} - \frac{b}{4} + \frac{2 c}{5}$$
+
+
