@@ -4,14 +4,27 @@ title: 기호 수학(Symbolic Math)
 ---
 
 
-> ## 선수 지식 {.prereq}
+> ## 선수 지식과 참고자료 {.prereq}
 >
-> - 미적분
-> - 선형대수
+> - 수학 기본 지식 -- 대수, 미적분, 선형대수
+> - 데이터과학과 기계학습을 학습하기 위한 투철한 열정
+>
+> ### xwMOOC 오픈 교재
+> 
+> - [컴퓨터 과학 언플러그드](http://unplugged.xwmooc.org)  
+> - [리보그](http://reeborg.xwmooc.org)  
+>      - [러플](http://rur-ple.xwmooc.org)  
+> - [파이썬 거북이](http://swcarpentry.github.io/python-novice-turtles/index-kr.html)  
+> - [정보과학을 위한 파이썬](http://python.xwmooc.org)  
+> - [소프트웨어 카펜트리 5.3](http://statkclee.github.io/swcarpentry-version-5-3-new/)
+>     - [소프트웨어 카펜트리 5.2](http://swcarpentry.xwmooc.org)
+> - [통계적 사고](http://think-stat.xwmooc.org/)
+> - [IoT 오픈 하드웨어(라즈베리 파이)](http://raspberry-pi.xwmooc.org/)
+>     - [$100 오픈 컴퓨터](http://computer.xwmooc.org/)   
+>     - [$100 오픈 슈퍼컴퓨터](http://computers.xwmooc.org/)
+> - [R 데이터과학](http://data-science.xwmooc.org/)
+> - [R 팩키지](http://r-pkgs.xwmooc.org/)
 
-> ## 사전 준비 {.getready}
->
-> 데이터 과학과 기계학습을 학습하기 위한 투철한 열정
 
 ## 학습 목차
 
@@ -48,8 +61,4 @@ title: 기호 수학(Symbolic Math)
 > $$x = \frac{-b \pm \sqrt{b^2 - 4 a c}}{2 a}$$ 
 
 
-## 추가 학습 교재
 
-*   [참고문헌](reference.html)
-*   [토론](discussion.html)
-*   [강사 안내서](instructors.html)
