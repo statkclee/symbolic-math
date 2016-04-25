@@ -28,6 +28,7 @@ title: 기호 수학(Symbolic Math)
 | [간략화](14-simplification.html) |[Simplification](http://docs.sympy.org/latest/tutorial/simplification.html)|
 | [미적분](15-calculus.html) |[Calculus](http://docs.sympy.org/latest/tutorial/calculus.html)|
 | [문제풀이](16-solver.html) |[Solver](http://docs.sympy.org/latest/tutorial/solvers.html)|
+| [행렬](17-matrix.html) |[Matrices](http://docs.sympy.org/latest/tutorial/matrices.html)|
 
 [^sympy-tutorial]: [SymPy Tutorial](http://docs.sympy.org/latest/tutorial/)
 
