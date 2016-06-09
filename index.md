@@ -28,7 +28,7 @@ title: 기호 수학(Symbolic Math)
 
 ## 학습 목차
 
-1. [수학의 역사](01-history.html)
+1. [수학의 역사](01-math-history.html)
 1. [심파이 설치](02-sympy-install.html)
 1. 심파이 사용지침서 [^sympy-tutorial]
     
