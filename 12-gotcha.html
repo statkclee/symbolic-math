@@ -3,48 +3,48 @@
   <head>
     <meta charset="utf-8">
     <meta name="generator" content="pandoc">
-    <title>Software Carpentry: </title>
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
-    <link rel="stylesheet" type="text/css" href="css/swc.css" />
-    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
-    <meta charset="UTF-8" />
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    
-      ga('create', 'UA-59802572-17', 'auto');
-      ga('send', 'pageview');
-    
+    <title>Software Carpentry: 12-gotcha</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/swc.css" />
+    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
+    <meta charset="UTF-8" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-59802572-17', 'auto');
+      ga('send', 'pageview');
+    
     </script>
   </head>
   <body class="lesson">
     <div class="container card">
-      <div class="banner">
-        <a href="http://software-carpentry.org" title="Software Carpentry">
-          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" />
-        </a>
+      <div class="banner">
+        <a href="http://software-carpentry.org" title="Software Carpentry">
+          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" />
+        </a>
       </div>
       <article>
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
                     <h1 class="title"></h1>
-          <h2 id="gotcha-gotcha">Gotcha <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></h2>
+          <h2 id="gotcha-gotcha">Gotcha <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h2>
 <p>먼저 심파이에 관해 명확히 하자. 심파이는 <code>NumPy</code>, <code>Django</code>, 좀더 심하게는 <code>sys</code>, <code>re</code> 같은 표준 파이썬 라이브러리 모듈처럼 파이썬 라이브러리에 불과하다. 이것이 의미하는 바는 심파이라고 해서 특별히 파이썬 언어에 무언가를 추가하는 것이 없다. 파이썬 언어가 상속한 한계를 심파이에 그래도 상속된다. 이러한 점이 또한 심파이를 가능하면 언제라도 파이썬 관용구를 사용할 수 있게 해서, 파이썬 프로그래밍에 이미 친숙한 누구나 쉽게 심파이로 프로그래밍을 가능케 한다. 간단한 예제로, 심파이는 표현식을 만들어 내는데 파이썬 구문을 사용한다. 암묵적 곱셈(<code>3x</code> 혹은 <code>3 x</code>처럼)은 파이썬에서 허용되지 않는데, 심파이에서도 따라서 허용되지 않는다. <code>3</code>에 <code>x</code>를 곱하려면, <code>*</code>을 넣어 <code>3*x</code>를 타이핑해야 된다.</p>
 <h3 id="기호">기호</h3>
 <p>위와 같은 결과로 파이썬을 이용가능한 어떤 환경에도 심파이를 사용할 수 있게 된다. 다른 파이썬 라이브러리를 가져오듯이, 단지 가져오기(import)만 하면 된다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> sympy <span class="im">import</span> <span class="op">*</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="im">from</span> sympy <span class="im">import</span> <span class="op">*</span></span></code></pre></div>
 <p>상기 명령어를 통해서 인터랙티브 파이썬 세션으로 심파이에 있는 모든 함수와 클래스를 가져온다. 이제 계산을 시작한다고 가정해보자.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">+</span> <span class="dv">1</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>x <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
 <pre><code>---------------------------------------------------------------------------
 
 NameError                                 Traceback (most recent call last)
@@ -55,47 +55,47 @@ NameError                                 Traceback (most recent call last)
 
 NameError: name &#39;x&#39; is not defined</code></pre>
 <p>이럴 수가! 변수 <code>x</code>를 사용하려고 했지만, <code>x</code>가 정의되지 않았다는 응답이 시스템에서 나왔다. 파이썬에서 변수가 정의되기 전까지 변수는 어떤 의미를 갖지 않는다. 심파이도 다른 것이 없다. 아마도 이미 사용해봤을 다른 기호조작시스템과 달리, 심파이에서 변수는 자동으로 정의되지 않는다. 변수를 정의하려면, <code>symbols</code> 함수를 사용해야 한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> symbols(<span class="st">&#39;x&#39;</span>)
-x <span class="op">+</span> <span class="dv">1</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>x <span class="op">=</span> symbols(<span class="st">&#39;x&#39;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>x <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
 <pre><code>x + 1</code></pre>
 <p><code>symbols</code> 함수는 공백 혹은 콤마로 구분되는 변수명 문자열을 받아 이것으로부터 기호를 생성한다. 그리고 나서 이것에 변수명을 대입한다. 나중에 이 이슈에 대한 해결책으로 활용할 수 있는 편리한 방식을 살펴볼 것이다. 지금 당장은, 이번 절에서 사용할 <code>x</code>, <code>y</code>, <code>z</code> 변수명을 정의만 한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x, y, z <span class="op">=</span> symbols(<span class="st">&#39;x y z&#39;</span>)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>x, y, z <span class="op">=</span> symbols(<span class="st">&#39;x y z&#39;</span>)</span></code></pre></div>
 <p>마지막으로 언급할 내용은, 대입되는 기호명과 변수명이 서로 관련될 필요는 없다는 점에 주목한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a, b <span class="op">=</span> symbols(<span class="st">&#39;b a&#39;</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>a, b <span class="op">=</span> symbols(<span class="st">&#39;b a&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>a</span></code></pre></div>
 <pre><code>b</code></pre>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">b</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a>b</span></code></pre></div>
 <pre><code>a</code></pre>
 <p><code>a</code> 명칭을 갖는 기호에 변수 <code>b</code>를 대입하고, <code>b</code> 명칭 기호에 <code>a</code> 변수를 대입해서 매우 혼동스럽게 만들었다. 이제 <code>a</code>라고 불리는 파이썬 변수는 <code>b</code>라는 이름을 갖는 심파이 기호를 지칭하고, <code>b</code>도 마찬가지다. 매우 혼동스럽다. 다음과 같이 작업을 했을 수도 있다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">crazy <span class="op">=</span> symbols(<span class="st">&#39;unrelated&#39;</span>)
-crazy <span class="op">+</span> <span class="dv">1</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a>crazy <span class="op">=</span> symbols(<span class="st">&#39;unrelated&#39;</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>crazy <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
 <pre><code>unrelated + 1</code></pre>
 <p>상기 예제를 통해서 기호는 원한다면 문자 1개보다 더 긴 장문의 명칭을 가질 수 있다는 것을 알 수 있다.</p>
 <p>일반적으로, 모범사례로 기호를 동일한 파이썬 명칭을 갖는 변수로 대입하는 것이다. 물론 예외는 있다: 기호 명칭은 파이썬 변수에서 허용되지 않는 문자를 포함하거나, 장문의 명칭을 갖는 기호를 문자 하나 파이썬 변수로 대입해서 긴 명칭을 타이핑하는 것을 회피하기도 한다.</p>
 <p>혼동을 회피하고자, 기호명칭과 파이썬 변수명은 항상 일치시킨다. 더 나아가, ‘’기호(Symbol)’‘라는 단어는 심파이 기호를’‘변수(variable)’’이라는 단어는 파이썬 변수를 지칭한다.</p>
 <p>마지막으로, 심파이 기호와 파이썬 변수 차이를 이해했는지 확실히 하자. 다음 상황을 고려해본다:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> symbols(<span class="st">&#39;x&#39;</span>)
-expr <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span>
-x <span class="op">=</span> <span class="dv">2</span>
-<span class="bu">print</span>(expr)</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a>x <span class="op">=</span> symbols(<span class="st">&#39;x&#39;</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a>expr <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a>x <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a><span class="bu">print</span>(expr)</span></code></pre></div>
 <pre><code>x + 1</code></pre>
 <p><code>x</code>를 <code>2</code>로 바꾸는 것은 <code>expr</code>에 어떤 영향도 없다. <code>x=2</code>를 통해 파이썬 변수 <code>x</code> 가 <code>2</code>로 바뀌지만, <code>expr</code>을 생성하는데 사용된 심파이 기호 <code>x</code>에는 영향이 없다. <code>expr</code>을 생성할 때, 파이썬 변수 <code>x</code>는 기호다. 기호를 생성한 뒤에 파이선 변수 <code>x</code>를 2로 변경했다. 하지만, <code>expr</code>은 동일하게 남아있다. 이런 동작사례는 심파이에만 유일무이한 것은 아니다. 모든 파이썬 프로그램이 이런 방식으로 동작한다: 변수를 변경하면, 해당변수로 이미 생성된 표현식은 자동으로 변경되지 않는다. 예를 들어,</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> <span class="st">&#39;abc&#39;</span>
-expr <span class="op">=</span> x <span class="op">+</span> <span class="st">&#39;def&#39;</span>
-expr</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a>x <span class="op">=</span> <span class="st">&#39;abc&#39;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a>expr <span class="op">=</span> x <span class="op">+</span> <span class="st">&#39;def&#39;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a>expr</span></code></pre></div>
 <pre><code>&#39;abcdef&#39;</code></pre>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> <span class="st">&#39;ABC&#39;</span>
-expr</code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a>x <span class="op">=</span> <span class="st">&#39;ABC&#39;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a>expr</span></code></pre></div>
 <pre><code>&#39;abcdef&#39;</code></pre>
 <p>상기 예제에서, <code>expr</code>이 새로운 <code>x</code> 값으로 하려면, <code>expr</code>로 생성된 코드를 재평가할 필요가 있다. 즉, <code>expr = x + 1</code>. <code>expr</code>이 여러 줄에 걸쳐 있다면 난잡할 수도 있다. 심파이 같은 기호계산시스템을 사용하는 장점중 하나는 <code>expr</code>에 대한 기호표현을 하고나서 <code>x</code>를 해당 값으로 치환한다. 심파이에서 이런 작업을 수행하는 올바른 방식은 <code>subs</code> 메쏘드를 사용하는 것으로 나중에 좀더 자세히 다뤄질 것이다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">=</span> symbols(<span class="st">&#39;x&#39;</span>)
-expr <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span>
-expr.subs(x, <span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a>x <span class="op">=</span> symbols(<span class="st">&#39;x&#39;</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a>expr <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a>expr.subs(x, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>3</code></pre>
 <aside class="callout panel panel-info">
-<div class="panel-heading">
-<h3 id="급-도움말"><span class="glyphicon glyphicon-pushpin"></span>급 도움말</h3>
-</div>
+<section id="급-도움말" class="panel-heading">
+<h3><span class="glyphicon glyphicon-pushpin"></span>급 도움말</h3>
+</section>
 <div class="panel-body">
 <p>표현식에 포함된 기호값을 변경하려면, <code>subs</code>를 사용하라.</p>
 <p>x = symbols(‘x’)<br />
@@ -107,90 +107,90 @@ expr.subs(x, 2)<br />
 <h3 id="등호-기호">등호 기호</h3>
 <p>심파이가 파이썬 구문을 확장하지 않는 또다른 중요한 점은 <code>=</code>이 심파이에 등호를 표현하지 않는다는 것이다. 그보다는 파이썬 변수 대입이다. 이런 기능은 파이썬 언어에 변경될 수 없게 박혀있고, 심파이도 이것을 변경하지는 않는다.</p>
 <p>하지만, 파이썬 등호 검정으로 사용되는 <code>==</code>이 등호로 심파이에도 사용된다고 생각할 수는 있다. 이것도 사실은 아니다. <code>==</code>을 사용할 때 무슨 일이 일어나는지 살펴보자.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">+</span> <span class="dv">1</span> <span class="op">==</span> <span class="dv">4</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a>x <span class="op">+</span> <span class="dv">1</span> <span class="op">==</span> <span class="dv">4</span></span></code></pre></div>
 <pre><code>False</code></pre>
 <p>기호적으로 <code>x + 1 == 4</code>을 처리하는 대신에 <code>False</code> 결과만 얻게 되었다. 심파이에서 <code>==</code>은 정확하게 구조적으로 동치인지 검정하는 것을 표현한다. <code>a == b</code>가 의미하는 바는 <span class="math inline">\(a = b\)</span> 인지를 <em>묻는</em> 것이다. <code>==</code> 실행결과로 항상 <code>bool</code> 값을 얻게 된다. <code>Eq</code>라는 별도 객체가 있는데 기호적 동치(symbolic equality)를 생성하는데 사용될 수 있다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Eq(x <span class="op">+</span> <span class="dv">1</span>, <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a>Eq(x <span class="op">+</span> <span class="dv">1</span>, <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>Eq(x + 1, 4)</code></pre>
 <p>추가로 <code>==</code>에 대한 주의사항이 있다. <span class="math inline">\((x + 1)^2 = x^2 + 2x + 1\)</span> 가 성립하는 알고자 한다고 가정하자. 다음과 같이 코드를 작성해볼 수 있다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">(x<span class="dv">+1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a>(x<span class="op">+</span><span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span> <span class="op">==</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
 <pre><code>False</code></pre>
 <p><code>False</code>를 다시 얻게 된다. 하지만, <span class="math inline">\((x + 1)^2\)</span> 수식은 <span class="math inline">\(x^2 + 2x + 1\)</span>와 같다. 여기서 무슨 일이 벌어지고 있는 것일까? 심파이에 버그를 찾은 것일까? 기초적인 대수에 대한 사실도 인지하지 못할 만큼 심파이는 엉터리일까?</p>
 <p><code>==</code>은 <em>정확히</em> 구조적 동치성을 검증하는 것이라는 점을 상기한다. ‘’정확히’’가 여기서 의미하는 바는 두 표현식이 정확하게 구조적으로 동일해야만, <code>==</code>으로 동치임을 비교하게 된다. <span class="math inline">\((x + 1)^2\)</span> 수식은 <span class="math inline">\(x^2 + 2x + 1\)</span>와 기호적으로 같지 않다. 수식 하나는 두 항을 더해서 제곱한 것과 또다른 수식은 항 세개를 더했다는 점에서 차이가 난다.</p>
 <p>심파이를 라이브러리로 사용할 때, 정확히 기호적 동치에 대해서 <code>==</code> 검증을 수행하는 것이 기호적 동치성을 표현하거나 수학적 동치성을 검증하는 것보다 훨씬더 유용하다는 것이 밝혀졌다. 하지만, 신규 사용자로 후자 두건에 대해 아마도 더 관심을 가질 것이다. 이미 기호적으로 동치를 표현하는 대안을 살펴봤다: <code>Eq</code>. 두개가 동치인지 검증하는데 있어, <span class="math inline">\(a = b\)</span>면, <span class="math inline">\(a - b = 0\)</span>이 되는 기본적 사실을 상기하는 것이 최선이다. 따라서, <span class="math inline">\(a = b\)</span>인지 검사하는 최선의 방식은 <span class="math inline">\(a - b\)</span>를 취해서 간략화하고 나서 0으로 수렴해가는지 살펴본다. 이런 작업을 수행하는데 <code>simplify</code>라고 불리는 함수를 학습할 것이다. 이 방법이 결코 틀리지 않는 것은 아니다 – 사실 기호적 표현식 2개가 똑같이 동치인지 일반적으로 알아내는 것이 불가능하다는 것이 <a href="http://en.wikipedia.org/wiki/Richardson%27s_theorem">이론적으로 증명</a>될 수 있다 – 하지만 일반적인 대부분의 표현식에 대해 매우 잘 동작된다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> (x <span class="op">+</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span>
-b <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span>
-simplify(a <span class="op">-</span> b)</code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true"></a>a <span class="op">=</span> (x <span class="op">+</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true"></a>b <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true"></a>simplify(a <span class="op">-</span> b)</span></code></pre></div>
 <pre><code>0</code></pre>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">c <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span>
-simplify(a <span class="op">-</span> c)</code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true"></a>c <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true"></a>simplify(a <span class="op">-</span> c)</span></code></pre></div>
 <pre><code>4*x</code></pre>
 <p><code>equals</code>라는 메쏘드도 있는데 임의점에서 수치적으로 평가해서 두 표현식이 동치인지를 알아내는 검정이다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">a <span class="op">=</span> cos(x)<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> sin(x)<span class="op">**</span><span class="dv">2</span>
-b <span class="op">=</span> cos(<span class="dv">2</span><span class="op">*</span>x)
-a.equals(b)</code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true"></a>a <span class="op">=</span> cos(x)<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> sin(x)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true"></a>b <span class="op">=</span> cos(<span class="dv">2</span><span class="op">*</span>x)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true"></a>a.equals(b)</span></code></pre></div>
 <pre><code>True</code></pre>
 <h3 id="두가지-마지막-언급-과">두가지 마지막 언급: ^ 과 /</h3>
 <p>멱승하는데 표준인 <code>^</code> 대신에 <code>**</code>이 사용된 것을 파악했을 것이다. 이유는 심파이가 파이썬 관례를 준수하기 때문이다. 파이썬에서 <code>^</code>은 배타적 논리합(logical exclusive or)을 나타낸다. 심파이도 이 관례를 준수한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="va">True</span> <span class="op">^</span> <span class="va">False</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true"></a><span class="va">True</span> <span class="op">^</span> <span class="va">False</span></span></code></pre></div>
 <pre><code>True</code></pre>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="va">True</span> <span class="op">^</span> <span class="va">True</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true"></a><span class="va">True</span> <span class="op">^</span> <span class="va">True</span></span></code></pre></div>
 <pre><code>False</code></pre>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">^</span> y</code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true"></a>x <span class="op">^</span> y</span></code></pre></div>
 <pre><code>Xor(x, y)</code></pre>
 <p>마지막으로, 심파이가 동작하는데 있어 작은 기술적 논의가 필요한 것이 순서다. <code>x + 1</code>같이 타이핑하게 되면, 심파이 기호 <code>x</code>가 파이썬 정수 <code>1</code>에 더해진다. 파이썬 연산자 규칙은 심파이로 하여금 파이썬에게 심파이 객체가 파이썬 정수에 더하기 되는 방법을 알려준다. 그래서 <code>1</code>이 자동으로 심파이 정수객체로 변환된다.</p>
 <p>이런 종류의 연산자 마술이 자동으로 뒤에서 일어나게 되어, 무슨 일이 벌어지고 있는지 알 필요도 없다. 하지만, 한가지 예외 상황이 있다. 심파이 객체와 심파이 객체를 조합하거나, 심파이 객체와 파이썬 객체를 조합할 때마다, 심파이 객체를 얻게 되지만, 파이썬 객체만을 두개 조합할 때 심파이가 들어갈 틈이 없어, 파이썬 객체를 얻게 된다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">type</span>(Integer(<span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true"></a><span class="bu">type</span>(Integer(<span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>sympy.core.numbers.Integer</code></pre>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">type</span>(<span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true"></a><span class="bu">type</span>(<span class="dv">1</span> <span class="op">+</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>int</code></pre>
 <blockquote>
 <p>심파이 라이브에 상기 예제를 입력하게 되면, (1+1)은 정수로 씌워져서 올바른 출력이 보여지지 않는다.</p>
 </blockquote>
 <p>일반적으로 이런 점은 큰 문제가 되지 않는다. 파이썬 정수는 심파이 정수와 동일하게 동작한다. 하지만, 한가지 중요한 예외는 있다: 나누기. 심파이에서 두 정수를 나누면 유리수(Rational)가 된다:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Integer(<span class="dv">1</span>) <span class="op">/</span> Integer(<span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true"></a>Integer(<span class="dv">1</span>) <span class="op">/</span> Integer(<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>1/3</code></pre>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="bu">type</span>(Integer(<span class="dv">1</span>)<span class="op">/</span>Integer(<span class="dv">3</span>))</code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true"></a><span class="bu">type</span>(Integer(<span class="dv">1</span>)<span class="op">/</span>Integer(<span class="dv">3</span>))</span></code></pre></div>
 <pre><code>sympy.core.numbers.Rational</code></pre>
 <p>하지만, 파이썬에서 <code>/</code> 표기는 정수 나눗셈 혹은 부동소수점 나눗셈을 표현하는데, 파이썬 2 혹은 3에 따라 다르고, <code>from __future__ import division</code>을 실행하느냐 실행하지 않느냐에 따라 다르다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> __future__ <span class="im">import</span> division
-<span class="dv">1</span><span class="op">/</span><span class="dv">2</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true"></a><span class="im">from</span> __future__ <span class="im">import</span> division</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true"></a><span class="dv">1</span><span class="op">/</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>0.5</code></pre>
 <blockquote>
 <p>심파이 라이브에 상기 예제를 입력하게 되면, (1/2)은 정수로 씌워져서 올바른 출력이 보여지지 않는다.</p>
 </blockquote>
 <p>이런 상황을 회피하려면, 유리수 객체를 명시적으로 생성시킨다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Rational(<span class="dv">1</span>,<span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true"></a>Rational(<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>1/2</code></pre>
 <p>이런 문제는 더 커다란 <code>int/int</code> 기호 표현식을 갖을 때 발생한다. 예를 들어:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">+</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true"></a>x <span class="op">+</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>x + 0.5</code></pre>
 <blockquote>
 <p>심파이 라이브에 상기 예제를 입력하게 되면, (1/2)은 정수로 씌워져서 올바른 출력이 보여지지 않는다.</p>
 </blockquote>
 <p>이런 문제가 발생하는 이유는 파이썬이 먼저 <code>1/2</code>를 <code>0.5</code>로 평가하고 나서, <code>x</code>에 더하기 될 때 심파이 객체로 형변환되기 때문이다. 다시, 이런 문제를 피해가는 방식은 유리수 객체를 명시적으로 생성하면 된다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">+</span> Rational(<span class="dv">1</span>,<span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true"></a>x <span class="op">+</span> Rational(<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>x + 1/2</code></pre>
 <p><a href="http://docs.sympy.org/latest/gotchas.html#gotchas">Gotchas and Pitfalls</a> 문서에 이런 상황을 피해나가는 몇가지 조언이 제시되어 있다.</p>
-<div class="footnotes">
+<section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
-<li id="fn1"><p>[Gotcha (programming)](https://en.wikipedia.org/wiki/Gotcha_(programming)<a href="#fnref1">↩</a></p></li>
+<li id="fn1" role="doc-endnote"><p>[Gotcha (programming)](https://en.wikipedia.org/wiki/Gotcha_(programming)<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</div>
+</section>
         </div>
       </div>
       </article>
-      <div class="footer">
-        <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
-        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/lesson-template">Source</a>
-        <a class="label swc-blue-bg" href="mailto:admin@software-carpentry.org">Contact</a>
-        <a class="label swc-blue-bg" href="LICENSE.html">License</a>
+      <div class="footer">
+        <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
+        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/lesson-template">Source</a>
+        <a class="label swc-blue-bg" href="mailto:admin@software-carpentry.org">Contact</a>
+        <a class="label swc-blue-bg" href="LICENSE.html">License</a>
       </div>
     </div>
-    <!-- Javascript placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+    <!-- Javascript placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
     <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
   </body>
 </html>

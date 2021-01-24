@@ -30,6 +30,7 @@ title: 기호 수학(Symbolic Math)
 | [행렬](17-matrix.html) |[Matrices](http://docs.sympy.org/latest/tutorial/matrices.html)|
 
 1. [미적분학(calculus)](calculus.html)
+1. [수능수학 2020](korean-gre.html)
 
 
 

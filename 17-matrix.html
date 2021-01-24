@@ -3,105 +3,105 @@
   <head>
     <meta charset="utf-8">
     <meta name="generator" content="pandoc">
-    <title>Software Carpentry: </title>
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
-    <link rel="stylesheet" type="text/css" href="css/swc.css" />
-    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
-    <meta charset="UTF-8" />
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    
-      ga('create', 'UA-59802572-17', 'auto');
-      ga('send', 'pageview');
-    
+    <title>Software Carpentry: 17-matrix</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
+    <link rel="stylesheet" type="text/css" href="css/swc.css" />
+    <link rel="alternate" type="application/rss+xml" title="Software Carpentry Blog" href="http://software-carpentry.org/feed.xml"/>
+    <meta charset="UTF-8" />
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    
+      ga('create', 'UA-59802572-17', 'auto');
+      ga('send', 'pageview');
+    
     </script>
   </head>
   <body class="lesson">
     <div class="container card">
-      <div class="banner">
-        <a href="http://software-carpentry.org" title="Software Carpentry">
-          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" />
-        </a>
+      <div class="banner">
+        <a href="http://software-carpentry.org" title="Software Carpentry">
+          <img alt="Software Carpentry banner" src="img/software-carpentry-banner.png" />
+        </a>
       </div>
       <article>
       <div class="row">
         <div class="col-md-10 col-md-offset-1">
                     <h1 class="title"></h1>
           <h1 id="행렬">행렬</h1>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> sympy <span class="im">import</span> <span class="op">*</span>
-init_printing(use_unicode<span class="op">=</span><span class="va">True</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="im">from</span> sympy <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>init_printing(use_unicode<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 <p>심파이에서 행렬을 만드는데 <code>Matrix</code> 객체를 사용한다. 행렬을 구성하는 행벡터 리스트를 조합해서 행렬을 생성한다. 예를 들어, 다음과 같은 행렬을 생성하려면,</p>
 <p><span class="math inline">\(\left[\begin{array}{cc}1 &amp; -1\\3 &amp; 4\\0 &amp; 2\end{array}\right]\)</span></p>
 <p>다음과 같이 작성한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Matrix([[<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], [<span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">0</span>, <span class="dv">2</span>]])</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>Matrix([[<span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], [<span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">0</span>, <span class="dv">2</span>]])</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}1 &amp; -1\\3 &amp; 4\\0 &amp; 2\end{matrix}\right]\]</span></p>
 <p>칼럼 벡터를 쉽게 생성하도록, 리스트 요소가 칼럼벡터로 간주된다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">Matrix([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>Matrix([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}1\\2\\3\end{matrix}\right]\]</span></p>
 <p>심파이 혹은 파이썬 다른 객체와 마찬가지 방식으로 행렬을 조작한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>]])
-N <span class="op">=</span> Matrix([<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>])
-M<span class="op">*</span>N</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>M <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>]])</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>N <span class="op">=</span> Matrix([<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>])</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>M<span class="op">*</span>N</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}5\\3\end{matrix}\right]\]</span></p>
 <p>심파이 행렬에 대해 주의할 한가지 점은 심파이 다른 객체와 달리 변경가능하다는 것이다. 다음에 살펴보게 되듯이 행렬을 그때 그때 변경할 수 있다는 것을 의미한다. 이것이 갖는 단점은 <code>Matrix</code>를 심파이 표현식 내부 혹은 딕셔너리 키와 같이 변경가능하지 않는 것이 필요한 곳에는 사용할 수 없다. <code>Matrix</code>에 대한 변경불가한 것이 필요한 경우 <code>ImmutableMatrix</code>를 사용한다.</p>
 <h2 id="기본연산">기본연산</h2>
 <h3 id="형태shape">형태(Shape)</h3>
 <p><code>Matrix</code>에 대한 기본 연산자가 다음에 있다. <code>shape</code>를 사용해서 행렬 형태를 얻는다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">4</span>]])
-M</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>M <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="op">-</span><span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">4</span>]])</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>M</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}1 &amp; 2 &amp; 3\\-2 &amp; 0 &amp; 4\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M.shape</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>M.shape</span></code></pre></div>
 <p><span class="math display">\[\left ( 2, \quad 3\right )\]</span></p>
 <h2 id="행과-열에-접근하기">행과 열에 접근하기</h2>
 <p>행렬에서 행 혹은 열을 뽑아내려면, <code>row</code> 혹은 <code>col</code> 메쏘드를 사용한다. 예를 들어, <code>M.row(0)</code> 명령어는 첫번째 행을 뽑아낸다. <code>M.col[-1]</code> 명령어는 마지막 칼럼을 뽑아낸다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M.row(<span class="dv">0</span>)</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>M.row(<span class="dv">0</span>)</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}1 &amp; 2 &amp; 3\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M.col(<span class="op">-</span><span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>M.col(<span class="op">-</span><span class="dv">1</span>)</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}3\\4\end{matrix}\right]\]</span></p>
 <h2 id="행과-열을-삭제하고-삽입하기">행과 열을 삭제하고 삽입하기</h2>
 <p>행과 열을 삭제하는데 <code>row_del</code>, <code>col_del</code> 명령어를 사용한다. 이 연산자는 행렬을 그자리에서 바로 변경시킨다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M.col_del(<span class="dv">0</span>)
-M</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a>M.col_del(<span class="dv">0</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>M</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}2 &amp; 3\\0 &amp; 4\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M.row_del(<span class="dv">1</span>)
-M</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a>M.row_del(<span class="dv">1</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a>M</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}2 &amp; 3\end{matrix}\right]\]</span></p>
 <p>행과 열을 삽입하는데, <code>row_insert</code> 혹은 <code>col_insert</code> 메쏘드를 사용한다. 이 연산은 그자리에서 바로 작동하지 않는다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a>M</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}2 &amp; 3\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M <span class="op">=</span> M.row_insert(<span class="dv">1</span>, Matrix([[<span class="dv">0</span>,<span class="dv">4</span>]]))
-M</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a>M <span class="op">=</span> M.row_insert(<span class="dv">1</span>, Matrix([[<span class="dv">0</span>,<span class="dv">4</span>]]))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>M</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}2 &amp; 3\\0 &amp; 4\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M <span class="op">=</span> M.col_insert(<span class="dv">0</span>, Matrix([<span class="dv">1</span>,<span class="op">-</span><span class="dv">2</span>]))
-M</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a>M <span class="op">=</span> M.col_insert(<span class="dv">0</span>, Matrix([<span class="dv">1</span>,<span class="op">-</span><span class="dv">2</span>]))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a>M</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}1 &amp; 2 &amp; 3\\-2 &amp; 0 &amp; 4\end{matrix}\right]\]</span></p>
 <p>명시적으로 언급하지 않는 경우, 다음에 언급되는 메쏘드는 그자리에서 바로 동작하지는 않는다. 일반적으로, 그자리에서 작동하지 않는 메쏘드는 신규 <code>Matrix</code>를 반환하고, 작동하는 메쏘드는 <code>None</code>을 반환한다.</p>
 <h2 id="기본-메쏘드">기본 메쏘드</h2>
 <p>앞에서 언급했듯이, 더하기와 곱하기 같은 단순한 연산은 <code>+</code>, <code>*</code>, <code>**</code> 기호를 사용해서 수행된다. 역행렬을 구하는 경우, <code>-1</code> 거듭제곱만 하면 된다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">3</span>], [<span class="op">-</span><span class="dv">2</span>, <span class="dv">3</span>]])
-N <span class="op">=</span> Matrix([[<span class="dv">0</span>, <span class="dv">3</span>], [<span class="dv">0</span>, <span class="dv">7</span>]])
-M <span class="op">+</span> N</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a>M <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">3</span>], [<span class="op">-</span><span class="dv">2</span>, <span class="dv">3</span>]])</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a>N <span class="op">=</span> Matrix([[<span class="dv">0</span>, <span class="dv">3</span>], [<span class="dv">0</span>, <span class="dv">7</span>]])</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a>M <span class="op">+</span> N</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}1 &amp; 6\\-2 &amp; 10\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M <span class="op">*</span> N</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a>M <span class="op">*</span> N</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}0 &amp; 24\\0 &amp; 15\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="dv">3</span><span class="op">*</span>M</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="dv">3</span><span class="op">*</span>M</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}3 &amp; 9\\-6 &amp; 9\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M<span class="op">**</span><span class="dv">2</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a>M<span class="op">**</span><span class="dv">2</span></span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}-5 &amp; 12\\-8 &amp; 3\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M<span class="op">**-</span><span class="dv">1</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a>M<span class="op">**-</span><span class="dv">1</span></span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}\frac{1}{3} &amp; - \frac{1}{3}\\\frac{2}{9} &amp; \frac{1}{9}\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">N<span class="op">**-</span><span class="dv">1</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a>N<span class="op">**-</span><span class="dv">1</span></span></code></pre></div>
 <pre><code>---------------------------------------------------------------------------
 
 ValueError                                Traceback (most recent call last)
@@ -109,102 +109,102 @@ ValueError                                Traceback (most recent call last)
 
 ValueError: Matrix det == 0; not invertible.</code></pre>
 <p>전치 행렬을 구하려면, <code>T</code>를 사용한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])
-M</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a>M <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true"></a>M</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}1 &amp; 2 &amp; 3\\4 &amp; 5 &amp; 6\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M.T</code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a>M.T</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}1 &amp; 4\\2 &amp; 5\\3 &amp; 6\end{matrix}\right]\]</span></p>
 <h2 id="행렬-생성자">행렬 생성자</h2>
 <p>일반적인 행렬을 생성하는 경우 생성자가 몇개 존재한다. 단위행렬을 생성하는 경우, <code>eye</code>를 사용한다. <code>eye(n)</code> 명령어는 <span class="math inline">\(n \times n\)</span> 행렬을 생성시킨다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">eye(<span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a>eye(<span class="dv">3</span>)</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}1 &amp; 0 &amp; 0\\0 &amp; 1 &amp; 0\\0 &amp; 0 &amp; 1\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">eye(<span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a>eye(<span class="dv">4</span>)</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}1 &amp; 0 &amp; 0 &amp; 0\\0 &amp; 1 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 1 &amp; 0\\0 &amp; 0 &amp; 0 &amp; 1\end{matrix}\right]\]</span></p>
 <p>모든 요소가 0이 되는 행렬을 생성하려면, <code>zeros</code>를 사용한다. <code>zeros(n,m)</code> 명령어는 모두 0인 <span class="math inline">\(n \times m\)</span> 행렬을 생성시킨다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">zeros(<span class="dv">2</span>,<span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a>zeros(<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}0 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 0\end{matrix}\right]\]</span></p>
 <p>마찬가지로, <code>ones</code> 명령어는 모두 1인 행렬을 생성시킨다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">ones(<span class="dv">3</span>,<span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a>ones(<span class="dv">3</span>,<span class="dv">2</span>)</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}1 &amp; 1\\1 &amp; 1\\1 &amp; 1\end{matrix}\right]\]</span></p>
 <p>대각행렬을 생성하려면, <code>diag</code> 명령어를 사용한다. <code>diag</code> 명령어에 들어가는 인자는 숫자 혹은 행렬이 될 수 있다. 숫자는 <span class="math inline">\(1 \times 1\)</span> 행렬로 간주된다. 행렬이 대각선으로 쌓이게 된다. 나머지 요소는 0으로 채워진다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">diag(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true"></a>diag(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}1 &amp; 0 &amp; 0\\0 &amp; 2 &amp; 0\\0 &amp; 0 &amp; 3\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">diag(<span class="op">-</span><span class="dv">1</span>, ones(<span class="dv">2</span>,<span class="dv">2</span>), Matrix([<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">5</span>]))</code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true"></a>diag(<span class="op">-</span><span class="dv">1</span>, ones(<span class="dv">2</span>,<span class="dv">2</span>), Matrix([<span class="dv">5</span>,<span class="dv">7</span>,<span class="dv">5</span>]))</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}-1 &amp; 0 &amp; 0 &amp; 0\\0 &amp; 1 &amp; 1 &amp; 0\\0 &amp; 1 &amp; 1 &amp; 0\\0 &amp; 0 &amp; 0 &amp; 5\\0 &amp; 0 &amp; 0 &amp; 7\\0 &amp; 0 &amp; 0 &amp; 5\end{matrix}\right]\]</span></p>
 <h2 id="고급-방법">고급 방법</h2>
 <h3 id="행렬식">행렬식</h3>
 <p>행렬에 대한 행렬식(determinant)를 계산하려면, <code>det</code>를 사용한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>]])
-M</code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true"></a>M <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">2</span>, <span class="op">-</span><span class="dv">1</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>]])</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true"></a>M</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}1 &amp; 0 &amp; 1\\2 &amp; -1 &amp; 3\\4 &amp; 3 &amp; 2\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M.det()</code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true"></a>M.det()</span></code></pre></div>
 <p><span class="math display">\[-1\]</span></p>
 <h3 id="기약행-사다리꼴reduced-row-echelon-form-rref">기약행 사다리꼴(reduced row echelon form, RREF)</h3>
 <p>행렬을 기약행 사다리꼴로 표현하려면, <code>rref</code> 메쏘드를 사용한다. <code>rref</code>는 두 요소를 갖는 튜플을 반환한다. 첫번째는 기약행 사다리꼴이고, 두번째는 추측 칼럼 인덱스 리스트가 된다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>], [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">7</span>], [<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>]])
-M</code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true"></a>M <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">3</span>], [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">7</span>], [<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">4</span>]])</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true"></a>M</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}1 &amp; 0 &amp; 1 &amp; 3\\2 &amp; 3 &amp; 4 &amp; 7\\-1 &amp; -3 &amp; -3 &amp; -4\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M.rref()</code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true"></a>M.rref()</span></code></pre></div>
 <p><span class="math display">\[\left ( \left[\begin{matrix}1 &amp; 0 &amp; 1 &amp; 3\\0 &amp; 1 &amp; \frac{2}{3} &amp; \frac{1}{3}\\0 &amp; 0 &amp; 0 &amp; 0\end{matrix}\right], \quad \left [ 0, \quad 1\right ]\right )\]</span></p>
 <blockquote>
 <p><code>rref</code>로 반환되는 튜플 첫번째 요소는 자료형이 <code>Matrix</code>이며, 두번째는 자료형이 <code>list</code> 리스트다.</p>
 </blockquote>
 <h3 id="영공간null-space">영공간(null space)</h3>
 <p>행렬의 영공간을 찾으려면, <code>columnspace</code> 메쏘드를 사용한다. <code>columnspace</code> 메쏘드는 행렬 열공간을 생성하는 열벡터 리스트를 반환한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">2</span> ,<span class="dv">1</span> , <span class="dv">3</span>], [<span class="dv">3</span> , <span class="dv">1</span>, <span class="dv">4</span>]])
-M</code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true"></a>M <span class="op">=</span> Matrix([[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">2</span> ,<span class="dv">1</span> , <span class="dv">3</span>], [<span class="dv">3</span> , <span class="dv">1</span>, <span class="dv">4</span>]])</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true"></a>M</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}1 &amp; 1 &amp; 2\\2 &amp; 1 &amp; 3\\3 &amp; 1 &amp; 4\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M.columnspace()</code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true"></a>M.columnspace()</span></code></pre></div>
 <p><span class="math display">\[\left [ \left[\begin{matrix}1\\2\\3\end{matrix}\right], \quad \left[\begin{matrix}1\\1\\1\end{matrix}\right]\right ]\]</span></p>
 <h3 id="고유값-고유벡터-대각화">고유값, 고유벡터, 대각화</h3>
 <p>행렬의 고유값을 찾아내려면, <code>eigenvals</code> 메쏘드를 사용한다. <code>eigenvals</code> 메쏘드는 <code>eigenvalue:algebraic multiplicity</code> 쌍에 대한 딕셔너리를 반환한다. (<a href="http://docs.sympy.org/latest/tutorial/solvers.html#tutorial-roots">roots</a> 출력결과와 유사)</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M <span class="op">=</span> Matrix([[<span class="dv">3</span>, <span class="op">-</span><span class="dv">2</span>,  <span class="dv">4</span>, <span class="op">-</span><span class="dv">2</span>], [<span class="dv">5</span>,  <span class="dv">3</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">2</span>], [<span class="dv">5</span>, <span class="op">-</span><span class="dv">2</span>,  <span class="dv">2</span>, <span class="op">-</span><span class="dv">2</span>], [<span class="dv">5</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>,  <span class="dv">3</span>]])
-M</code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true"></a>M <span class="op">=</span> Matrix([[<span class="dv">3</span>, <span class="op">-</span><span class="dv">2</span>,  <span class="dv">4</span>, <span class="op">-</span><span class="dv">2</span>], [<span class="dv">5</span>,  <span class="dv">3</span>, <span class="op">-</span><span class="dv">3</span>, <span class="op">-</span><span class="dv">2</span>], [<span class="dv">5</span>, <span class="op">-</span><span class="dv">2</span>,  <span class="dv">2</span>, <span class="op">-</span><span class="dv">2</span>], [<span class="dv">5</span>, <span class="op">-</span><span class="dv">2</span>, <span class="op">-</span><span class="dv">3</span>,  <span class="dv">3</span>]])</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true"></a>M</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}3 &amp; -2 &amp; 4 &amp; -2\\5 &amp; 3 &amp; -3 &amp; -2\\5 &amp; -2 &amp; 2 &amp; -2\\5 &amp; -2 &amp; -3 &amp; 3\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M.eigenvals()</code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true"></a>M.eigenvals()</span></code></pre></div>
 <p><span class="math display">\[\left \{ -2 : 1, \quad 3 : 1, \quad 5 : 2\right \}\]</span></p>
 <p>행렬 <code>M</code>이 -2, 3, 5 고유값을 갖고 있다는 것과 더불어, 고유값 -2 와 3은 대수적 1 중복을 갖고, 고유값 5는 대수적 중복 2를 갖는다.</p>
 <p>행렬에 대한 고유벡터를 구하려면, <code>eigenvects</code> 메쏘드를 사용한다. <code>eigenvects</code> 메쏘드는 <code>(eigenvalue:algebraic multiplicity, [eigenvectors])</code> 형태 튜플 리스트를 반환한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">M.eigenvects()</code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true"></a>M.eigenvects()</span></code></pre></div>
 <p><span class="math display">\[\left [ \left ( -2, \quad 1, \quad \left [ \left[\begin{matrix}0\\1\\1\\1\end{matrix}\right]\right ]\right ), \quad \left ( 3, \quad 1, \quad \left [ \left[\begin{matrix}1\\1\\1\\1\end{matrix}\right]\right ]\right ), \quad \left ( 5, \quad 2, \quad \left [ \left[\begin{matrix}1\\1\\1\\0\end{matrix}\right], \quad \left[\begin{matrix}0\\-1\\0\\1\end{matrix}\right]\right ]\right )\right ]\]</span></p>
 <p>예를 들어, 고유값 5는 기하적 중복 2를 갖는데, 고유벡터가 2이기 때문임을 나타내고 있다. 대수적으로 기하적으로 중복수는 모든 고유값에 대해 동일하기 때문에, <code>M</code> 행렬을 대각화 가능하다.</p>
 <p>행렬을 대각화하기 위해서, <code>diagonalize</code> 메쏘드를 사용한다. <code>diagonalize</code> 메쏘드는 <span class="math inline">\((P,D)\)</span> 튜플을 반환한다. <span class="math inline">\(D\)</span>는 대각이고, <span class="math inline">\(M = PDP^-1\)</span>이다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">P, D <span class="op">=</span> M.diagonalize()
-P</code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true"></a>P, D <span class="op">=</span> M.diagonalize()</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true"></a>P</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}0 &amp; 1 &amp; 1 &amp; 0\\1 &amp; 1 &amp; 1 &amp; -1\\1 &amp; 1 &amp; 1 &amp; 0\\1 &amp; 1 &amp; 0 &amp; 1\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">D</code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true"></a>D</span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}-2 &amp; 0 &amp; 0 &amp; 0\\0 &amp; 3 &amp; 0 &amp; 0\\0 &amp; 0 &amp; 5 &amp; 0\\0 &amp; 0 &amp; 0 &amp; 5\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">P<span class="op">*</span>D<span class="op">*</span>P<span class="op">**-</span><span class="dv">1</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true"></a>P<span class="op">*</span>D<span class="op">*</span>P<span class="op">**-</span><span class="dv">1</span></span></code></pre></div>
 <p><span class="math display">\[\left[\begin{matrix}3 &amp; -2 &amp; 4 &amp; -2\\5 &amp; 3 &amp; -3 &amp; -2\\5 &amp; -2 &amp; 2 &amp; -2\\5 &amp; -2 &amp; -3 &amp; 3\end{matrix}\right]\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">P<span class="op">*</span>D<span class="op">*</span>P<span class="op">**-</span><span class="dv">1</span> <span class="op">==</span> M</code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true"></a>P<span class="op">*</span>D<span class="op">*</span>P<span class="op">**-</span><span class="dv">1</span> <span class="op">==</span> M</span></code></pre></div>
 <pre><code>True</code></pre>
 <p><code>eigenvects</code>도 고유값을 포함하고 있기 때문에, 고유벡터도 필요한 경우 <code>eigenvals</code> 대신에 사용한다. 하지만, 고유벡터를 계산해내는 것이 연산량이 많기 때문에, 고유값만 필요한 경우 <code>eigenvals</code>가 선호된다.</p>
 <p>원하는 것이 고유다항식인 경우, <code>charpoly</code> 메쏘드를 사용한다. <code>eigenvals</code>보다 더 효율적인데, 이유는 기호근(symbolic root)을 계산하는데 연산이 많이 소요되기 때문이다.</p>
 <aside class="callout panel panel-info">
-<div class="panel-heading">
-<h3 id="람다"><span class="glyphicon glyphicon-pushpin"></span>람다</h3>
-</div>
+<section id="람다" class="panel-heading">
+<h3><span class="glyphicon glyphicon-pushpin"></span>람다</h3>
+</section>
 <div class="panel-body">
 <p><code>lambda</code>는 파이썬에서 예약어로 <span class="math inline">\(\lambda\)</span> 기호를 생성하려면, 심파이 기호와 파이썬 변수에 동일한 명칭으로 인해 (<code>b</code>가 없는) <code>lamda</code>를 사용한다. 여전히 <span class="math inline">\(\lambda\)</span>로 출력된다.</p>
 </div>
 </aside>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">lamda <span class="op">=</span> symbols(<span class="st">&#39;lamda&#39;</span>)
-p <span class="op">=</span> M.charpoly(lamda)
-factor(p)</code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true"></a>lamda <span class="op">=</span> symbols(<span class="st">&#39;lamda&#39;</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true"></a>p <span class="op">=</span> M.charpoly(lamda)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true"></a>factor(p)</span></code></pre></div>
 <p><span class="math display">\[\left(\lambda - 5\right)^{2} \left(\lambda - 3\right) \left(\lambda + 2\right)\]</span></p>
         </div>
       </div>
       </article>
-      <div class="footer">
-        <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
-        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/lesson-template">Source</a>
-        <a class="label swc-blue-bg" href="mailto:admin@software-carpentry.org">Contact</a>
-        <a class="label swc-blue-bg" href="LICENSE.html">License</a>
+      <div class="footer">
+        <a class="label swc-blue-bg" href="http://software-carpentry.org">Software Carpentry</a>
+        <a class="label swc-blue-bg" href="https://github.com/swcarpentry/lesson-template">Source</a>
+        <a class="label swc-blue-bg" href="mailto:admin@software-carpentry.org">Contact</a>
+        <a class="label swc-blue-bg" href="LICENSE.html">License</a>
       </div>
     </div>
-    <!-- Javascript placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
+    <!-- Javascript placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="css/bootstrap/bootstrap-js/bootstrap.js"></script>
     <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
   </body>
 </html>

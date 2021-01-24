@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="generator" content="pandoc">
-    <title>Software Carpentry: </title>
+    <title>Software Carpentry: 15-calculus</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
@@ -40,42 +40,42 @@
                     <h1 class="title"></h1>
           <h1 id="미적분">미적분</h1>
 <p>미분, 적분, 극한, 급수 전개 같은 기본적인 미분적분을 심파이에서 계산하는 방법을 다룬다. 미적분 수학에 친숙하지 않다면, 그냥 넘어가도 좋다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> sympy <span class="im">import</span> <span class="op">*</span>
-x, y, z <span class="op">=</span> symbols(<span class="st">&#39;x y z&#39;</span>)
-init_printing(use_unicode<span class="op">=</span><span class="va">True</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="im">from</span> sympy <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>x, y, z <span class="op">=</span> symbols(<span class="st">&#39;x y z&#39;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>init_printing(use_unicode<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 <h2 id="미분">미분</h2>
 <p>미분을 할 때는 <code>diff</code> 함수를 사용한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">diff(cos(x), x)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>diff(cos(x), x)</span></code></pre></div>
 <p><span class="math display">\[- \sin{\left (x \right )}\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">diff(exp(x<span class="op">**</span><span class="dv">2</span>), x)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>diff(exp(x<span class="op">**</span><span class="dv">2</span>), x)</span></code></pre></div>
 <p><span class="math display">\[2 x e^{x^{2}}\]</span></p>
 <p><code>diff</code> 함수는 한번에 미분을 여러번 수행할 수 있다. 미분을 여러번 수행하려면, 변수를 미분취하고자 하는 만큼 전달하거나, 변수 뒤에 숫자를 넘겨 전달한다. 예를 들어, 다음 두가지 모두 <span class="math inline">\(x^4\)</span>에 대해 3번 미분한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">diff(x<span class="op">**</span><span class="dv">4</span>, x, x, x)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>diff(x<span class="op">**</span><span class="dv">4</span>, x, x, x)</span></code></pre></div>
 <p><span class="math display">\[24 x\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">diff(x<span class="op">**</span><span class="dv">4</span>, x, <span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>diff(x<span class="op">**</span><span class="dv">4</span>, x, <span class="dv">3</span>)</span></code></pre></div>
 <p><span class="math display">\[24 x\]</span></p>
 <p>한번에 다수 변수에 대해 미분을 취할 수도 있다. 단일 변수 미분과 동일한 구분을 사용해서 각 미분을 순서대로 전달한다. 예를 들어, 다음 각각은 <span class="math inline">\(\frac{\partial^7}{\partial x\partial y^2\partial z^4} e^{x y z}\)</span> 미분을 계산한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> exp(x<span class="op">*</span>y<span class="op">*</span>z)
-diff(expr, x,y,y,z,z,z,z)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a>expr <span class="op">=</span> exp(x<span class="op">*</span>y<span class="op">*</span>z)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>diff(expr, x,y,y,z,z,z,z)</span></code></pre></div>
 <p><span class="math display">\[x^{3} y^{2} \left(x^{3} y^{3} z^{3} + 14 x^{2} y^{2} z^{2} + 52 x y z + 48\right) e^{x y z}\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">diff(expr, x, y, <span class="dv">2</span>, z, <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>diff(expr, x, y, <span class="dv">2</span>, z, <span class="dv">4</span>)</span></code></pre></div>
 <p><span class="math display">\[x^{3} y^{2} \left(x^{3} y^{3} z^{3} + 14 x^{2} y^{2} z^{2} + 52 x y z + 48\right) e^{x y z}\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">diff(expr, x, y, y, z, <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a>diff(expr, x, y, y, z, <span class="dv">4</span>)</span></code></pre></div>
 <p><span class="math display">\[x^{3} y^{2} \left(x^{3} y^{3} z^{3} + 14 x^{2} y^{2} z^{2} + 52 x y z + 48\right) e^{x y z}\]</span></p>
 <p><code>diff</code>를 메쏘드로 호출할 수도 있다. <code>diff</code>를 호출하는 두가지 방식은 정확히 동일하고, 편리함을 목적으로 제공된다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr.diff(x, y, y, z, <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a>expr.diff(x, y, y, z, <span class="dv">4</span>)</span></code></pre></div>
 <p><span class="math display">\[x^{3} y^{2} \left(x^{3} y^{3} z^{3} + 14 x^{2} y^{2} z^{2} + 52 x y z + 48\right) e^{x y z}\]</span></p>
 <p>값을 매기지 않은 미분을 생성하려면, <code>Derivatives</code> 클래스를 사용한다. <code>diff</code>와 동일한 구문을 갖는다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">deriv <span class="op">=</span> Derivative(expr, x, y, y, z, <span class="dv">4</span>)
-deriv</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a>deriv <span class="op">=</span> Derivative(expr, x, y, y, z, <span class="dv">4</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a>deriv</span></code></pre></div>
 <p><span class="math display">\[\frac{\partial^{7}}{\partial x\partial y^{2}\partial z^{4}}  e^{x y z}\]</span></p>
 <p>아직 값을 매기지 않은 미분에 값을 매기려면, <code>doit</code> 메쏘드를 사용한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">deriv.doit()</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a>deriv.doit()</span></code></pre></div>
 <p><span class="math display">\[x^{3} y^{2} \left(x^{3} y^{3} z^{3} + 14 x^{2} y^{2} z^{2} + 52 x y z + 48\right) e^{x y z}\]</span></p>
 <p>이런 값을 매기지 않은 객체는 미분에 대한 값을 매기는 것을 지연시키거나 출판 목적으로 유용하다. 심파이가 표현식 미분을 어떻게 계산하는지 모를 때도 사용될 수 있다.(예를 들어, 정의되지 않는 함수를 포함하고 있는 경우, <a href="http://docs.sympy.org/latest/tutorial/solvers.html#tutorial-dsolve">Solving Differential Equations</a>에 기술되어 있다)</p>
 <h2 id="적분">적분</h2>
 <p>적분을 계산하는데 <code>integrate</code> 함수를 사용한다. 두가지 유형의 적분이 존재한다: 부정적분과 정적분. 부정적분, 즉 역도함수, 원시함수를 계산하려면, 표현식 다음에 변수를 전달만하면 된다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">integrate(cos(x), x)</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a>integrate(cos(x), x)</span></code></pre></div>
 <p><span class="math display">\[\sin{\left (x \right )}\]</span></p>
 <p>심파이가 적분 상수를 포함하지 않음에 주목한다. 포함시키려면, 본인 스스로 포함을 시키거나 미분방정식으로 문제를 다시 바꾸어 표현해서 <code>dsolve</code> 함수로 푸는데, 이 경우에 상수가 추가되어 있다. <a href="http://docs.sympy.org/latest/tutorial/solvers.html#tutorial-dsolve">Solving Differential Equations</a>을 참고한다.</p>
 <blockquote>
@@ -84,106 +84,106 @@ deriv</code></pre></div>
 <p>정적분을 계산하려면, 인자를 <code>(integration_variable, lower_limit, upper_limit)</code> 순서로 넘긴다. 예를 들어, 다음을 계산하는데,</p>
 <p><span class="math inline">\(\int_0^\infty e^{-x}\,dx\)</span></p>
 <p>다음과 같이 작성한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">integrate(exp(<span class="op">-</span>x), (x, <span class="dv">0</span>, oo))</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a>integrate(exp(<span class="op">-</span>x), (x, <span class="dv">0</span>, oo))</span></code></pre></div>
 <p><span class="math display">\[1\]</span></p>
 <p>부정적분과 마찬가지로, 극한 튜플을 다수 넘겨서 다중적분을 계산할 수도 있다. 예를 들어,</p>
 <p>$ <em>{-}^{}</em>{-}^{} e^{- x^{2} - y^{2}}, dx, dy,$</p>
 <p>다음과 같이 계산한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">integrate(exp(<span class="op">-</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> y<span class="op">**</span><span class="dv">2</span>), (x, <span class="op">-</span>oo, oo), (y, <span class="op">-</span>oo, oo))</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a>integrate(exp(<span class="op">-</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> y<span class="op">**</span><span class="dv">2</span>), (x, <span class="op">-</span>oo, oo), (y, <span class="op">-</span>oo, oo))</span></code></pre></div>
 <p><span class="math display">\[\pi\]</span></p>
 <p><code>integrate</code> 함수가 적분을 계산할 수 없는 경우, 값 매김할 수 없는 <code>integral</code> 객체를 반환한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> integrate(x<span class="op">**</span>x, x)
-<span class="bu">print</span>(expr)</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a>expr <span class="op">=</span> integrate(x<span class="op">**</span>x, x)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="bu">print</span>(expr)</span></code></pre></div>
 <pre><code>Integral(x**x, x)</code></pre>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a>expr</span></code></pre></div>
 <p><span class="math display">\[\int x^{x}\, dx\]</span></p>
 <p><code>Derivative</code> 와 마찬가지로, <code>Integral</code>을 사용해서 값 매김할 수 없는 적분을 생성할 수 있다. 나중에 해당 적분에 값 매김을 하려면, <code>doit</code>을 호출한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> Integral(log(x)<span class="op">**</span><span class="dv">2</span>, x)
-expr</code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a>expr <span class="op">=</span> Integral(log(x)<span class="op">**</span><span class="dv">2</span>, x)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a>expr</span></code></pre></div>
 <p><span class="math display">\[\int \log^{2}{\left (x \right )}\, dx\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr.doit()</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a>expr.doit()</span></code></pre></div>
 <p><span class="math display">\[x \log^{2}{\left (x \right )} - 2 x \log{\left (x \right )} + 2 x\]</span></p>
 <p><code>integrate</code> 함수는 정적분과 부정적분을 항상 계산하는데 이바지하는 강력한 알고리즘을 사용한다. 휴리스틱 패턴 매칭 알고리즘, <a href="http://en.wikipedia.org/wiki/Risch_algorithm">Risch algorithm</a> 부분 구현, 특수 함수, 특히 정적분에 대한 적분을 계산하는데 유용한 <a href="http://en.wikipedia.org/wiki/Meijer_g-function">Meijer G-functions</a>를 이용한 알고리즘이 포함된다. <code>integrate</code> 함수의 강력함을 보여주는 사례가 다음에 나와 있다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">integ <span class="op">=</span> Integral((x<span class="op">**</span><span class="dv">4</span> <span class="op">+</span> x<span class="op">**</span><span class="dv">2</span><span class="op">*</span>exp(x) <span class="op">-</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>x<span class="op">*</span>exp(x) <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">-</span> 
-                  exp(x))<span class="op">*</span>exp(x)<span class="op">/</span>((x <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span><span class="op">*</span>(x <span class="op">+</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span><span class="op">*</span>(exp(x) <span class="op">+</span> <span class="dv">1</span>)), x)
-integ</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a>integ <span class="op">=</span> Integral((x<span class="op">**</span><span class="dv">4</span> <span class="op">+</span> x<span class="op">**</span><span class="dv">2</span><span class="op">*</span>exp(x) <span class="op">-</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>x<span class="op">*</span>exp(x) <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">-</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a>                  exp(x))<span class="op">*</span>exp(x)<span class="op">/</span>((x <span class="op">-</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span><span class="op">*</span>(x <span class="op">+</span> <span class="dv">1</span>)<span class="op">**</span><span class="dv">2</span><span class="op">*</span>(exp(x) <span class="op">+</span> <span class="dv">1</span>)), x)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a>integ</span></code></pre></div>
 <p><span class="math display">\[\int \frac{\left(x^{4} + x^{2} e^{x} - x^{2} - 2 x e^{x} - 2 x - e^{x}\right) e^{x}}{\left(x - 1\right)^{2} \left(x + 1\right)^{2} \left(e^{x} + 1\right)}\, dx\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">integ.doit()</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a>integ.doit()</span></code></pre></div>
 <p><span class="math display">\[\log{\left (e^{x} + 1 \right )} + \frac{e^{x}}{x^{2} - 1}\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">integ <span class="op">=</span> Integral(sin(x<span class="op">**</span><span class="dv">2</span>), x)
-integ</code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a>integ <span class="op">=</span> Integral(sin(x<span class="op">**</span><span class="dv">2</span>), x)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true"></a>integ</span></code></pre></div>
 <p><span class="math display">\[\int \sin{\left (x^{2} \right )}\, dx\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">integ.doit()</code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a>integ.doit()</span></code></pre></div>
 <p><span class="math display">\[\frac{3 \sqrt{2} \sqrt{\pi} S\left(\frac{\sqrt{2} x}{\sqrt{\pi}}\right)}{8 \Gamma{\left(\frac{7}{4} \right)}} \Gamma{\left(\frac{3}{4} \right)}\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">integ <span class="op">=</span> Integral(x<span class="op">**</span>y<span class="op">*</span>exp(<span class="op">-</span>x), (x, <span class="dv">0</span>, oo))
-integ</code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a>integ <span class="op">=</span> Integral(x<span class="op">**</span>y<span class="op">*</span>exp(<span class="op">-</span>x), (x, <span class="dv">0</span>, oo))</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true"></a>integ</span></code></pre></div>
 <p><span class="math display">\[\int_{0}^{\infty} x^{y} e^{- x}\, dx\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">integ.doit()</code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a>integ.doit()</span></code></pre></div>
 <p><span class="math display">\[\begin{cases} \Gamma{\left(y + 1 \right)} &amp; \text{for}\: - \Re{y} &lt; 1 \\\int_{0}^{\infty} x^{y} e^{- x}\, dx &amp; \text{otherwise} \end{cases}\]</span></p>
 <p>마지막 예제는 <code>Piecewise</code> 표현식을 반환한다. 왜냐하면, <span class="math inline">\(\Re(y) &gt; 1\)</span>이 아닌 경우 적분이 수렴하지 않기 때문이다.</p>
 <h2 id="극한">극한</h2>
 <p>심파이는 <code>limit</code> 함수로 기호극한을 계산할 수 있다.</p>
 <p><span class="math inline">\(\lim_{x\to x_0} f(x)\)</span></p>
 <p>계산하는 구문은 <code>limit(f(x), x, x0)</code>와 같이 적는다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">limit(sin(x)<span class="op">/</span>x, x, <span class="dv">0</span>)</code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a>limit(sin(x)<span class="op">/</span>x, x, <span class="dv">0</span>)</span></code></pre></div>
 <p><span class="math display">\[1\]</span></p>
 <p>값매김 점이 특이점인 경우, <code>subs</code> 대신에 <code>limit</code>을 사용한다. 심파이가 <span class="math inline">\(\infty\)</span>를 표현하는 객체가 있지만, 값매김에 무한을 사용하게 되면 신뢰성에 문제가 생길 수 있다. 이유는 증가율 같은 것을 추적하지 못하기 때문이다. 또한, <span class="math inline">\(\infty - \infty\)</span> 와 <span class="math inline">\(\frac{\infty}{\infty}\)</span> 경우 <span class="math inline">\(\mathrm{nan}\)</span> (not-a-number, 숫자 아님)을 반환한다. 예를 들어,</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> exp(x)
-expr.subs(x, oo)</code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true"></a>expr <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> exp(x)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true"></a>expr.subs(x, oo)</span></code></pre></div>
 <p><span class="math display">\[\mathrm{NaN}\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">limit(expr, x, oo)</code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true"></a>limit(expr, x, oo)</span></code></pre></div>
 <p><span class="math display">\[0\]</span></p>
 <p><code>Derivative</code>와 <code>Integral</code>과 마찬가지로, <code>limit</code>는 값매김하지 않는 대응되는 클래스가 있는데, <code>Limit</code>이다. 값매김을 수행하려면, <code>doit</code>을 사용한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> Limit((cos(x) <span class="op">-</span> <span class="dv">1</span>)<span class="op">/</span>x, x, <span class="dv">0</span>)
-expr</code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true"></a>expr <span class="op">=</span> Limit((cos(x) <span class="op">-</span> <span class="dv">1</span>)<span class="op">/</span>x, x, <span class="dv">0</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true"></a>expr</span></code></pre></div>
 <p><span class="math display">\[\lim_{x \to 0^+}\left(\frac{1}{x} \left(\cos{\left (x \right )} - 1\right)\right)\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr.doit()</code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true"></a>expr.doit()</span></code></pre></div>
 <p><span class="math display">\[0\]</span></p>
 <p>한쪽에서 접근하는 극한에 값을 매기려면, <code>+</code> 혹은 <code>-</code> 부호를 넘겨준다. 예를 들어,</p>
 <p><span class="math inline">\(\lim_{x\to 0^+}\frac{1}{x},\)</span></p>
 <p>다음과 같이 작성해서 계산한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">limit(<span class="dv">1</span><span class="op">/</span>x, x, <span class="dv">0</span>, <span class="st">&#39;+&#39;</span>)</code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true"></a>limit(<span class="dv">1</span><span class="op">/</span>x, x, <span class="dv">0</span>, <span class="st">&#39;+&#39;</span>)</span></code></pre></div>
 <p><span class="math display">\[\infty\]</span></p>
 <p>반면에,</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">limit(<span class="dv">1</span><span class="op">/</span>x, x, <span class="dv">0</span>, <span class="st">&#39;-&#39;</span>)</code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true"></a>limit(<span class="dv">1</span><span class="op">/</span>x, x, <span class="dv">0</span>, <span class="st">&#39;-&#39;</span>)</span></code></pre></div>
 <p><span class="math display">\[-\infty\]</span></p>
 <h2 id="수열-전개">수열 전개</h2>
 <p>심파이로 특정 점 주변에 함수에 대해 점근적 수열 전개를 해서 계산할 수 있다. <span class="math inline">\(x = x_0\)</span> 점 주변에 <span class="math inline">\(x^n\)</span>차항으로 <span class="math inline">\(f(x)\)</span> 전개해서 계산하려면, <code>f(x).series(x, x0, n)</code>을 사용한다. <code>x0</code>와 <code>n</code>은 생략될 수 있는데, 생략한 경우, 기본디폴트값으로 <code>x0=0</code>, <code>n=6</code> 값이 사용된다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr <span class="op">=</span> exp(sin(x))
-expr.series(x, <span class="dv">0</span>, <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true"></a>expr <span class="op">=</span> exp(sin(x))</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true"></a>expr.series(x, <span class="dv">0</span>, <span class="dv">4</span>)</span></code></pre></div>
 <p><span class="math display">\[1 + x + \frac{x^{2}}{2} + \mathcal{O}\left(x^{4}\right)\]</span></p>
 <p>마지막에 <span class="math inline">\(O\left (x^4\right )\)</span> 항은 <span class="math inline">\(x=0\)</span> 에서 란다우(Landau) 항을 나타낸다. (컴퓨터 과학의 빅오(Big O) 표기법과 혼동하지 말자. 일반적으로 <span class="math inline">\(x = \infty\)</span> 로 갈 때 란다우 항을 표현한다.) <span class="math inline">\(x^4\)</span> 보다 크거나 같은 거듭제곱항을 갖는 모든 <span class="math inline">\(x\)</span> 항이 빠지게 됨을 의미한다. 거듭제곱항은 <code>series</code> 외부에서 생성되고 조작되는데, 자동으로 고차 거듭제곱항을 흡수하는 성질이 있다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x <span class="op">+</span> x<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> x<span class="op">**</span><span class="dv">6</span> <span class="op">+</span> O(x<span class="op">**</span><span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true"></a>x <span class="op">+</span> x<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> x<span class="op">**</span><span class="dv">6</span> <span class="op">+</span> O(x<span class="op">**</span><span class="dv">4</span>)</span></code></pre></div>
 <p><span class="math display">\[x + x^{3} + \mathcal{O}\left(x^{4}\right)\]</span></p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x<span class="op">*</span>O(<span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true"></a>x<span class="op">*</span>O(<span class="dv">1</span>)</span></code></pre></div>
 <p><span class="math display">\[\mathcal{O}\left(x\right)\]</span></p>
 <p>거듭제곱 항을 원치 않는 경우, <code>remove0</code> 메쏘드를 사용한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">expr.series(x, <span class="dv">0</span>, <span class="dv">4</span>).removeO()</code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true"></a>expr.series(x, <span class="dv">0</span>, <span class="dv">4</span>).removeO()</span></code></pre></div>
 <p><span class="math display">\[\frac{x^{2}}{2} + x + 1\]</span></p>
 <p><code>o</code> 표기법은 0이 아닌 임의 극한점에도 사용가능하다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">exp(x <span class="op">-</span> <span class="dv">6</span>).series(x, x0<span class="op">=</span><span class="dv">6</span>)</code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true"></a>exp(x <span class="op">-</span> <span class="dv">6</span>).series(x, x0<span class="op">=</span><span class="dv">6</span>)</span></code></pre></div>
 <p><span class="math display">\[-5 + \frac{1}{2} \left(x - 6\right)^{2} + \frac{1}{6} \left(x - 6\right)^{3} + \frac{1}{24} \left(x - 6\right)^{4} + \frac{1}{120} \left(x - 6\right)^{5} + x + \mathcal{O}\left(\left(x - 6\right)^{6}; x\rightarrow6\right)\]</span></p>
 <h2 id="유한-차분">유한 차분</h2>
 <p>지금까지 해석적 미분과 원시함수형태 표현식을 살펴봤다. 닫힌 형식 표기법이 존재하지 않는 곡선, 혹은 함수값을 알지 못하는 곡선에 대한 미분을 추정하는 표현식을 다루고자 하면 어떨까? 한가지 접근법은 유한차분을 사용하는 것이다.</p>
 <p><code>Derivative</code> 인스턴스에 <code>as_finite_diff</code> 방법을 사용해서 임의 거듭제곱항에 근사값을 생성한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f <span class="op">=</span> Function(<span class="st">&#39;f&#39;</span>)
-dfdx <span class="op">=</span> f(x).diff(x)
-as_finite_diff(dfdx)</code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true"></a>f <span class="op">=</span> Function(<span class="st">&#39;f&#39;</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true"></a>dfdx <span class="op">=</span> f(x).diff(x)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true"></a>as_finite_diff(dfdx)</span></code></pre></div>
 <p><span class="math display">\[- f{\left (x - \frac{1}{2} \right )} + f{\left (x + \frac{1}{2} \right )}\]</span></p>
 <p>1차 미분으로 <code>x</code> 주변에서 근사했는데, 1 간격크기를 사용해서 동일거리에 값 매김되는 최소점을 사용했다. 임의 간격크기를 사용할 수도 있다(기호 표현식을 포함하는 것도 가능).</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">f <span class="op">=</span> Function(<span class="st">&#39;f&#39;</span>)
-d2fdx2 <span class="op">=</span> f(x).diff(x, <span class="dv">2</span>)
-h <span class="op">=</span> Symbol(<span class="st">&#39;h&#39;</span>)
-as_finite_diff(d2fdx2, [<span class="op">-</span><span class="dv">3</span><span class="op">*</span>h, <span class="op">-</span>h, <span class="dv">2</span><span class="op">*</span>h])</code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true"></a>f <span class="op">=</span> Function(<span class="st">&#39;f&#39;</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true"></a>d2fdx2 <span class="op">=</span> f(x).diff(x, <span class="dv">2</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true"></a>h <span class="op">=</span> Symbol(<span class="st">&#39;h&#39;</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true"></a>as_finite_diff(d2fdx2, [<span class="op">-</span><span class="dv">3</span><span class="op">*</span>h, <span class="op">-</span>h, <span class="dv">2</span><span class="op">*</span>h])</span></code></pre></div>
 <p><span class="math display">\[\frac{1}{5 h^{2}} f{\left (- 3 h \right )} - \frac{1}{3 h^{2}} f{\left (- h \right )} + \frac{2}{15 h^{2}} f{\left (2 h \right )}\]</span></p>
 <p>가중치를 값매김하는데만 관심이 있다면, 수작업으로 다음과 같이 계산할 수도 있다:</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">finite_diff_weights(<span class="dv">2</span>,[<span class="op">-</span><span class="dv">3</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>],<span class="dv">0</span>)[<span class="op">-</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>]</code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true"></a>finite_diff_weights(<span class="dv">2</span>,[<span class="op">-</span><span class="dv">3</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">2</span>],<span class="dv">0</span>)[<span class="op">-</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div>
 <p><span class="math display">\[\left [ \frac{1}{5}, \quad - \frac{1}{3}, \quad \frac{2}{15}\right ]\]</span></p>
 <p><code>finite_diff_weights</code>에서 반환되는 마지막 요소만 필요하다는데 주목한다. 이런 이유는 <code>finite_diff_weights</code>가 차수가 낮은 미분과 더 적은 점을 사용해서 가중치를 생성하기 때문이다. (좀더 자세한 정보는 <code>finite_diff_weights</code> 문서를 참고한다.)</p>
 <p><code>finite_diff_weights</code>를 직접적으로 사용하는 것이 복잡해 보이고, <code>Derivative</code> 인스턴스에서 동작하는 <code>as_finite_diff</code> 함수가 유연하지 못한 경우, 거듭제곱항과 x_list, y_list, x0를 인자로 받는 <code>apply_finite_diff</code>를 사용한다.</p>
-<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python">x_list <span class="op">=</span> [<span class="op">-</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>]
-y_list <span class="op">=</span> symbols(<span class="st">&#39;a b c&#39;</span>)
-apply_finite_diff(<span class="dv">1</span>, x_list, y_list, <span class="dv">0</span>)</code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true"></a>x_list <span class="op">=</span> [<span class="op">-</span><span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>]</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true"></a>y_list <span class="op">=</span> symbols(<span class="st">&#39;a b c&#39;</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true"></a>apply_finite_diff(<span class="dv">1</span>, x_list, y_list, <span class="dv">0</span>)</span></code></pre></div>
 <p><span class="math display">\[- \frac{3 a}{20} - \frac{b}{4} + \frac{2 c}{5}\]</span></p>
         </div>
       </div>

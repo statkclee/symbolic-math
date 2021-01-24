@@ -1,0 +1,69 @@
+---
+layout: page
+title: "기호 수학(Symbolic Math) "
+subtitle: "미적분학(calculus)"
+author:
+- name: "이광춘"
+  affiliation: "[Tidyverse Korea](https://www.facebook.com/groups/tidyverse/)"
+tags: ["데이터 과학", "Data Science", "데이터 사이언스", "distill", "웹사이트", "과학기술", "블로그"]
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    include:
+      after_body: footer.html
+      before_body: header.html
+    theme: default
+    toc: yes
+    toc_depth: 2
+    toc_float: true
+    highlight: tango
+    code_folding: show
+    number_section: true
+    self_contained: yes
+editor_options: 
+  chunk_output_type: console
+bibliography: bibliography-cd.bib
+csl: biomed-central.csl
+---
+
+```{r setup2, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE,
+                      comment="", digits = 3, tidy = FALSE, prompt = FALSE, fig.align = 'center')
+
+library(reticulate)
+```
+
+
+# 수능시험 {#math-gre}
+
+인터넷에 공개된 "2020학년도 대학수학능력시험 문제 및 정답" PDF 문제를 풀어보자.
+
+- 가형은 의과대학, 대부분의 자연과학대학, 공과대학, 수학교육과, 과학교육과에 지원코자 한다면 필수적으로 응시해야 한다. 이과 교육과정 내용을 바탕으로 문제가 출제되고, 응시자는 99% 이상이 이과생이며 극소수의 문과생들이 응시한다.
+
+
+```{r math-gre}
+library(tidyverse)
+library(pdftools)
+library(magick)
+
+exam_pdf <- image_read_pdf("data/math_2020_2_1.pdf", page = 28)
+
+exam_pdf %>% 
+  image_scale("700") %>% 
+  image_draw()
+
+```
+
+
+# 수식 추출 {#extract-math}
+
+- [How to extract some mathematical expressionfrom pdf using python?](https://stackoverflow.com/questions/59139644/how-to-extract-some-mathematical-expressionfrom-pdf-using-python)
+
+[mathpix](https://mathpix.com/) 소프트웨어를 사용하면 PDF 문서에서 수식을 추출하여 $\LaTeX$으로 쉽게 변환시킬 수 있다.
+
+$$
+16 \times 2^{-3}
+$$
+
+
+
