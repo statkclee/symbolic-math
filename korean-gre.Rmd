@@ -73,6 +73,61 @@ $$
 $ pip install latex2sympy3==0.1.1
 ```
 
+# Sympy 풀기 {#sympy-python-code}
+
+파이썬 표현식으로 작성하고 나서 이를 Sympy 문법 값을 구하는 `N()`을 사용해서 해를 구한다.
+
+```{python solve-sympy-through-python}
+from sympy import *
+
+N(16 * 2**(- 3))
+```
+
+
+# R/Sympy 코드 변환 {#sympy-solution}
+
+## $\LaTeX$ &rarr; R  {#covert-r-code}
+
+[`latex2r`](https://github.com/tomicapretto/latex2r) 팩키지의 도움으로 $\LaTeX$ 코드를 R 코드로 변환시킨다.
+
+```{r convert-r-code}
+# devtools::install_github("tomicapretto/latex2r")
+library(latex2r)
+
+r_expr <- latex2r("16 \\times 2^{-3}")
+```
+
+R에서 `Sympy`를 통해 문제를 풀 수 있는 팩키지가 `caracas`, `rSympy`가 있다.
+[`caracas`](https://mikl.dk/post/2020-caracas_v101/)를 사용해서 문제를 풀면 다음과 같다. 
+
+```{r r-code-sympy-caracas}
+library(caracas)
+
+caracas::eval_to_symbol(r_expr)
+```
+
+[`rSympy`](https://kevinkotze.github.io/mm-tut1-symbolic/)를 사용해서 문제를 풀면 다음과 같다. 
+`^` &rarr; `**`으로 바꿔 파이썬 표현식에 맞춰 넣어주면 `rSympy`로 해를 구할 수 있다.
+`rJavaTools`오류로 R마크다운 컴파일 오류지만 인터랙티브 계산은 됨!!!
+
+```{r r-code-sympy-rsympy, eval = FALSE}
+library(rSymPy)
+
+sympy("16 * 2 ** (- 3)")
+```
+
+# 손으로 풀기 {#solve-manually}
+
+몇가지 방식으로 손으로 풀 수 있다.
+
+$16 \times 2^{-3} = \frac{16}{2^3} = \frac{2^4}{2^3} = 2^{4-3} = 2$
+
+$16 \times 2^{-3} = \frac{16}{2^3} = \frac{16}{8} = 2$
+
+
+# `SymPy Gamma` vs `Wolfram Alpha` {#wolfram-alpha}
+
+[SymPy Gamma](https://www.sympygamma.com/)는 [`Wolfram Alpha`](https://www.wolframalpha.com/)의 오픈소스 버전으로 보면 된다.
 
 
 
