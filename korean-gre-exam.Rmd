@@ -59,12 +59,13 @@ base_url <- "http://www.ebsi.co.kr/ebs/xip/xipa/retrieveGrdCutList.ebs"
 
 # 국영수 ----
 국영수 <- "subjectId=60001,63004,80003,80003,63004,61007,60001,61001,61001,61007&irecord=202012033&ord=1"
+# key_subject <- "subjectId=60001,63004,80003,80003,63004,61007,60001,61001,61001,61007&irecord=202012033&ord=1"
 # 사회 ----
 사회 <- "subjectId=141,142,140112,66002,66001,63003,63002,63001,146&irecord=202012033&ord=2"
 # 과학 ----
 과학 <- "subjectId=154,155,156,159,158,140116,140115,157&irecord=202012033&ord=3"
 
-key_subject_url <- glue::glue("{base_url}?{국영수}")
+key_subject_url <- glue::glue("{base_url}?{`국영수`}")
 
 Sys.setlocale("LC_ALL", "C")
 
@@ -74,7 +75,6 @@ key_subject_html <- key_subject_url %>%
 ## 과목별 등급표 -----
 
 subject_list <- list()
-
 
 for(i in 1:5) {
   subject_list[[i]] <- key_subject_html %>% 
@@ -89,7 +89,7 @@ subject_rank_tbl <- subject_list %>%
 
 ## 과목 통계 -----
 
-key_subject_dat
+subject_rank_tbl
 
 ## 과목 통계 -----
 
@@ -116,7 +116,7 @@ key_subject_tbl
 
 key_tbl <- bind_cols(key_subject_tbl, subject_rank_tbl)
 
-key_tbl 
+key_tbl
 ```
 
 
