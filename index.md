@@ -31,7 +31,7 @@ title: 기호 수학(Symbolic Math)
 
 1. [미적분학(calculus)](calculus.html)
 1. [수능수학 2020](korean-gre.html)
-
+1. [수능 문제지, 정답](korean-gre-exam.html)
 
 
 
