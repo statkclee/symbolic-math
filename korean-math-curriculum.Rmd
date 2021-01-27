@@ -1,0 +1,88 @@
+---
+layout: page
+title: "기호 수학(Symbolic Math) "
+subtitle: "수학 교육과정"
+author:
+- name: "이광춘"
+  affiliation: "[Tidyverse Korea](https://www.facebook.com/groups/tidyverse/)"
+tags: ["데이터 과학", "Data Science", "데이터 사이언스", "수능", "수학능력시험", "EBS", "수학", "수학교육과정"]
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    include:
+      after_body: footer.html
+      before_body: header.html
+    theme: default
+    toc: yes
+    toc_depth: 2
+    toc_float: true
+    highlight: tango
+    code_folding: show
+    number_section: true
+    self_contained: false
+editor_options: 
+  chunk_output_type: console
+bibliography: bibliography-cd.bib
+csl: biomed-central.csl
+---
+
+```{r setup2, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE,
+                      comment="", digits = 3, tidy = FALSE, prompt = FALSE, fig.align = 'center')
+
+library(reticulate)
+```
+
+
+# 중학교 수학 교육과정 {#math-middle-school}
+
+[2020년 중학교 수학 교육과정](https://m.blog.naver.com/holpi37/221758645852) 내용을 참고하여 2015년 개정 교육과정을 배우게 된다고 합니다.
+
+
+```{r middle-school}
+library(collapsibleTree)
+library(tidyverse)
+
+curriculum <- tribble(~"class", ~"category_I", ~"category_II",
+                      "중1", "Ⅰ.수와 연산","1. 소인수분해",
+                      "중1", "Ⅰ.수와 연산", "2. 정수와 유리수",
+                      "중1", "Ⅱ.문자와 식", "1. 문자의 사용과 식의 계산",
+                      "중1", "Ⅱ.문자와 식",  "2. 일차방정식",
+                      "중1", "Ⅲ.좌표평면과 그래프", "1. 좌표평면과 그래프",
+                      "중1", "Ⅳ.기본 도형", "1. 기본 도형",
+                      "중1", "Ⅳ.기본 도형", "2. 작도와 합동",
+                      "중1", "Ⅴ.평면도형과 입체도형", "1. 평면도형의 성질",
+                      "중1", "Ⅴ.평면도형과 입체도형", "2. 입체도형의 성질",
+                      "중1", "Ⅵ. 통계",  "1. 자료의 정리와 해석",
+                      "중2", "Ⅰ.수와 식의 계산", "1. 유리수와 순환소수", 
+                      "중2", "Ⅰ.수와 식의 계산", "2. 식의 계산",
+                      "중2", "Ⅱ.일차부등식과 연립일차방정식", "1. 일차부등식과 연립일차방정식",
+                      "중2", "Ⅲ.일차함수", "1. 일차함수와 그래프",
+                      "중2", "Ⅲ.일차함수", "2. 일차함수와 일차방정식의 관계",
+                      "중2", "Ⅳ.도형의 성질", "1.삼각형의 성질",
+                      "중2", "Ⅳ.도형의 성질", "2.사각형의 성질",
+                      "중2", "Ⅴ.도형의 닮음", "1. 도형의 닮음", 
+                      "중2", "Ⅴ.도형의 닮음", "2. 닮은 도형의 성질",
+                      "중2", "Ⅴ.도형의 닮음", "3. 피타고라스 정리", 
+                      "중2", "Ⅵ.확률", "1. 경우의 수와 확률",
+                      "중3", "Ⅰ.실수와 그 계산", "1. 제곱근과 실수",
+                      "중3", "Ⅰ.실수와 그 계산", "2. 근호를 포함한 식의 계산",
+                      "중3", "Ⅱ.식의 계산과 이차방정식", "1. 다항식의 곱셈과 인수분해",
+                      "중3", "Ⅱ.식의 계산과 이차방정식", "2. 이차방정식",
+                      "중3", "Ⅲ.이차함수", "1. 이차함수와 그 그래프",
+                      "중3", "Ⅲ.이차함수", "2. 이차함수 y=ax2+bx+c의 그래프",
+                      "중3", "Ⅳ.삼각비", "1. 삼각비",
+                      "중3", "Ⅳ.삼각비", "2. 삼각비의 활용",
+                      "중3", "Ⅴ.원의 성질", "1. 원과 직선", 
+                      "중3", "Ⅴ.원의 성질", "2. 원주각",
+                      "중3", "Ⅵ.통계", "1. 대푯값과 산포도",
+                      "중3", "Ⅵ.통계", "2. 상관관계"
+)
+
+curriculum %>% 
+  mutate_all(.funs = utf8::as_utf8) %>% 
+  collapsibleTree(c("class", "category_I", "category_II"))
+
+```
+
+
