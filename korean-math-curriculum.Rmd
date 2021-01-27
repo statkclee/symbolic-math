@@ -19,7 +19,7 @@ output:
     highlight: tango
     code_folding: show
     number_section: true
-    self_contained: true
+    self_contained: false
 editor_options: 
   chunk_output_type: console
 bibliography: bibliography-cd.bib
@@ -85,4 +85,22 @@ curriculum %>%
 
 ```
 
+# 초등학교 수학 교육과정 {#elementary-math}
+
+나무위키 [초등학교 수학](https://namu.wiki/w/%EC%B4%88%EB%93%B1%ED%95%99%EA%B5%90%20%EC%88%98%ED%95%99)에서 교육과정 데이터를 추출하여 시각화하면 많은 것을 배울 수 있다.
+
+
+```{r elementary-school}
+elementary_dat <- read_delim("data/elementary.txt", delim = "|")
+
+elementary_curriculum <- elementary_dat %>% 
+  separate(category, into = c("category_II", "category_I"), sep = "\\(") %>% 
+  mutate(category_I = str_remove_all(category_I, pattern = "([0-9]{1,2}+)|(\\[)|(\\])|(\\))|(ㄱ-ㅎ)|([A-Z])"),
+         category_I = str_remove(category_I, "ㄱ")) %>% 
+  relocate(category_I, .after = class)
+
+elementary_curriculum %>% 
+  mutate_all(.funs = utf8::as_utf8) %>% 
+  collapsibleTree(c("class", "category_I", "category_II"))
+```
 
