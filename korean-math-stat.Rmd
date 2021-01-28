@@ -1,0 +1,170 @@
+---
+layout: page
+title: "기호 수학(Symbolic Math) "
+subtitle: "수학 - 통계"
+author:
+- name: "이광춘"
+  affiliation: "[Tidyverse Korea](https://www.facebook.com/groups/tidyverse/)"
+tags: ["데이터 과학", "Data Science", "데이터 사이언스", "수학", "수능", "수학능력시험", "초중등", "통계"]
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    include:
+      after_body: footer.html
+      before_body: header.html
+    theme: default
+    toc: yes
+    toc_depth: 2
+    toc_float: true
+    highlight: tango
+    code_folding: show
+    number_section: true
+    self_contained: yes
+editor_options: 
+  chunk_output_type: console
+bibliography: bibliography-cd.bib
+csl: biomed-central.csl
+---
+
+```{r setup2, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE,
+                      comment="", digits = 3, tidy = FALSE, prompt = FALSE, fig.align = 'center')
+
+library(reticulate)
+```
+
+# 초등 수학 {#stat-elementary-5}
+
+초등학교 5학년 2학기 "평균과 가능성" 단원이 등장하고 "수의 범위와 어림하기"도 최대값 최소값을 기초통계량으로 구하는데 필히 도움이 되는 내용이다.
+
+## 이상과 이하를 알아볼까요? {#max-min}
+
+준기네 반 학생들이 왕복 오래달리기를 하였습니다. 준기네 반 학생들의 기록을 알아봅시다.
+
+| 이름     | 준기 | 명환 | 은서 | 나린 | 예은 | 상철 |
+|----------|------|------|------|------|------|------|
+| 횟수(회) | 70   | 65   | 75   | 73   | 68   | 71   |
+
+-   왕복 오래달리기 횟수가 70회와 같거나 많은 학생의 기록을 모두 써 보세요.
+
+    -   준기, 은서, 나린, 상철
+
+-   70과 같거나 큰 수를 어떻게 말하면 좋을지 이야기해 보세요.
+
+    -   70 이상인 수라고 합니다.
+
+상기 문제를 R 코드로 작성하여 풀면 다음과 같다.
+
+```{r solve-math-problem}
+run_vector <- c(70, 65, 75, 73, 68, 71)
+
+count_over_70 <- 0
+
+for(i in 1:length(run_vector)) {
+  if(run_vector[i] >= 70) {
+    count_over_70 <- count_over_70 +1
+  }
+}
+
+cat("왕복 오래달리기 기록 70 이상인 학생: ", count_over_70, "\n")
+```
+
+상기 오래달리기를 1차원 그래프로 시각화해보자.
+
+```{r solve-math-problem-viz}
+library(tidyverse)
+
+name_vector <- c("준기", "명환", "은서", "나린", "예은", "상철")
+
+run_tbl <- tibble(기록 = run_vector,
+                  이름 = name_vector) %>% 
+  mutate(indicator = ifelse(run_vector >=70, "이상", "미만"))
+
+run_tbl %>% 
+  ggplot(aes(x=기록, y=c(0), color = indicator)) +
+    geom_point(size = 2) +
+    geom_text(aes(label=`이름`), vjust = 2) +
+    geom_segment(x=70, xend=70, y=-0.1, yend=0.1, size=0.5, linetype = "dashed") +
+    scale_y_continuous(limits = c(-0.1, 0.1)) +
+    theme(axis.line=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),
+          panel.background=element_blank(),
+          panel.border=element_blank(),
+          panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),
+          plot.background=element_blank(),
+          plot.margin=unit(c(0,0,0,0), "cm"),
+          panel.spacing=unit(c(0,0,0,0), "cm"),
+          legend.position = "top") +
+  labs(color = "오래달리기 기준 70") +
+  scale_color_manual(values = c("blue", "red"))
+```
+
+## 평균 {#average}
+
+준기네 반 볼링 핀 쓰러뜨리기 선수의 기록을 나타낸 표입니다. 이 선수가 쓰러뜨린 볼링핀 수의 평균을 구해 봅시다.
+
+|  회 | 쓰러뜨린 볼링 핀의 수 |
+|:---:|:---------------------:|
+| 1회 |           9           |
+| 2회 |           6           |
+| 3회 |           10          |
+| 4회 |           7           |
+
+평균을 구하는 방식은 쓰러뜨린 볼링 핀의 수를 모두 더한 후에 시행횟수만큼 나눠주면 된다. 
+
+$$\frac{9+6+10+7}{1+1+1+1} = \frac{32}{4} = 8$$
+
+```{r average-pinball}
+trial <- c("1회", "2회", "3회", "4회")
+pins  <- c(9, 6, 10, 7)
+
+bowling_tbl <- tibble(회 = trial, 
+                      `핀의 수` = pins)
+
+bowling_tbl %>% 
+  summarise(평균  = mean(`핀의 수`),
+            평균2 = sum(`핀의 수`) / n())
+```
+
+그래프로 시각화하면 다음과 같다.
+
+```{r average-binball-viz}
+library(ggimage)
+library(magick)
+library(cowplot)
+
+bowling_img <- magick::image_read("fig/bowling-pins.png")
+
+bowling_tbl %>% 
+  mutate(image = "fig/bowling-pins.png") %>% 
+  ggplot(aes(x=회, y= `핀의 수`, fill = 회)) +
+    geom_col(width = 0.5) +
+    geom_text(aes(label =`핀의 수`), vjust = -2, size = 5) +
+    scale_y_continuous(limits = c(0,11)) +
+    theme_light() +
+    labs(title = "준기네 반 볼링핀 쓰러뜨리기 선수 기록",
+         x = "", y="쓰러뜨린 핀의 수") +
+    theme(legend.position = "none") +
+    draw_image(bowling_img,  x = 3.9, y = 9, scale = 3)
+```  
+
+좀더 직관적으로 표현하기 위해 점그래프(dotplot)를 사용해서 시각화를 한다.
+
+```{r make-dot-plot}
+bowling_tbl %>% 
+  tidyr::uncount(`핀의 수`) %>% 
+  mutate(image = "fig/bowling-pins.png") %>%   
+  ggplot(aes(x=회)) +
+    geom_dotplot(method = 'histodot', binwidth = 1) +
+    scale_y_continuous(NULL, breaks = NULL) +
+    theme_light() +
+    draw_image(bowling_img,  x = 3.9, y = 9, scale = 3) +
+    labs(title = "준기네 반 볼링핀 쓰러뜨리기 선수 기록",
+         x = "", y="쓰러뜨린 핀의 수") +
+    coord_fixed(ratio = 10)
+```
+

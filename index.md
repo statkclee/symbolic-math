@@ -33,6 +33,7 @@ title: 기호 수학(Symbolic Math)
 1. [수능수학 2020](korean-gre.html)
 1. [수능 문제지, 정답](korean-gre-exam.html)
 1. [수학 교육과정](korean-math-curriculum.html)
+    - [수학 - 통계](korean-math-stat.html)
 
 
 
