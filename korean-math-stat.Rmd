@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "기호 수학(Symbolic Math) "
-subtitle: "수학 - 통계"
+subtitle: "수학 통계: 초등"
 author:
 - name: "이광춘"
   affiliation: "[Tidyverse Korea](https://www.facebook.com/groups/tidyverse/)"
