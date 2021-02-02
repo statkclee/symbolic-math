@@ -35,7 +35,7 @@ title: 기호 수학(Symbolic Math)
 1. [수학 교육과정](korean-math-curriculum.html)
     - [수학 통계: 초등](korean-math-stat.html)
     - [수학 통계: 중등](korean-math-stat-middle.html)
-
+1. [GeoGebra - Rmarkdown](korean-geogebra.html)
 
 
 
