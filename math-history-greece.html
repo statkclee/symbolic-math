@@ -402,11 +402,11 @@ div.tocify {
 </ul></li>
 <li><p><strong>기하학(Geometry)</strong>: 점, 선, 면 등 공간에 있는 공간에 있는 도형의 성질, 즉 대상들의 치수, 모양, 상대적 위치를 탐구하는 수학의 한 분야</p></li>
 </ul>
-</div>
-<div id="prove-by-mathematical-induction" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> 수학적 귀납법</h1>
+<div id="prove-by-mathematical-induction" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> 수학적 귀납법</h2>
 <p>수학적 귀납법을 사용하여 자연수 홀수의 합이 <span class="math inline">\(n^2\)</span>이 됨을 증명하자. 이를 수식으로 표현하면 다음과 같다.</p>
 <p><span class="math display">\[1+3+...+(2n-1) = n^2,   n \in N\]</span> 상기 식을 증명하는데 수학적 귀납법을 사용한다.</p>
+</div>
 <div id="base-case" class="section level2 unnumbered">
 <h2 class="unnumbered">1단계: 기본 사례</h2>
 <p>기본 사례(base case)를 증명한다. 즉, 1인 경우 성립하는지 확인한다.</p>
@@ -424,14 +424,13 @@ div.tocify {
 <p><span class="math display">\[(1+3+\cdots +(2k-1))+(2(k+1)-1) = (1+3+\cdots +(2k-1))+(2k+1)\]</span> 상기 식을 정리하면 다음과 같다.</p>
 <p><span class="math display">\[(1+3+\cdots +(2k-1))+(2k+1)=k^2+2k+1=(k+1)^2\]</span> 따라서, 수학적 귀납법에 따라 모든 <span class="math inline">\(n\in \mathbb{N}\)</span> 자연수에 대해 <span class="math inline">\(1+3+\cdots+(2n-1)=n^2\)</span> 이 성립함을 증명했다.</p>
 </div>
-</div>
-<div id="prove-by-math" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> 기하학 증명</h1>
+<div id="prove-by-math" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> 기하학 증명</h2>
 <p>홀수의 합이 <span class="math inline">\(\text{홀수}^2\)</span>이 되는 것은 다음과 같이 기하학적으로 확인할 수 있다.</p>
 <p><img src="fig/mathematical-induction.png" width="303" /></p>
 </div>
-<div id="function-recurssion" class="section level1" number="4">
-<h1 number="4"><span class="header-section-number">4</span> 재귀 함수</h1>
+<div id="function-recurssion" class="section level2" number="1.3">
+<h2 number="1.3"><span class="header-section-number">1.3</span> 재귀 함수</h2>
 <p>재귀 함수(recursion)를 사용해서 다음과 같이 앞선 수학적 귀납법을 프로그래밍 코드로 작성할 수 있다.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>sum_of_odds_up_to_n &lt;-<span class="st"> </span><span class="cf">function</span>(n) {</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  </span>
@@ -449,6 +448,125 @@ div.tocify {
 <pre><code>[1] 9</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">sum_of_odds_up_to_n</span>(<span class="dv">9</span>)</span></code></pre></div>
 <pre><code>[1] 81</code></pre>
+</div>
+</div>
+<div id="pythagoras-theorem" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> 피타고라스 정리</h1>
+<p><strong>피타고라스 정리(Pythagoras Theorem)</strong>는 직각 삼각형의 두 직각변 <span class="math inline">\(a,b\)</span>를 각각 한 변으로 하는 정사각형 면적의 합은 빗변 <span class="math inline">\(c\)</span>를 한 변으로 하는 정사각형의 면적과 같다는 정리다. 수식으로 표현하면 다음과 같다.</p>
+<p><span class="math display">\[a^2 + b^2 = c^2\]</span></p>
+<p><a href="https://ko.wikipedia.org/wiki/%ED%94%BC%ED%83%80%EA%B3%A0%EB%9D%BC%EC%8A%A4_%EC%A0%95%EB%A6%AC">피타고라스 정리 증명</a>은 수도 없이 많지만 위키에 나와 있는 유클리드 증명, 대수적 증명, 삼각형의 닮음을 통한 증명, 미국 대통령 가필드 증명 등이 있다. 여기서 대수적 증명을 살펴보자.</p>
+<p><img src="fig/Pythagoras_proof.png" width="268" /></p>
+<p>먼저 큰 정사각형을 생각해보자. 큰 정사각형 전체 면적은 다음과 같다.</p>
+<p><span class="math display">\[(a+b) \times (a+b) = (a+b)^2\]</span> 다음으로 4개의 작은 삼각형의 합과 내부 정사각형의 면적을 구해보자.</p>
+<p><span class="math display">\[c^2 + 4\times \frac{1}{2} a b = c^2 + 2 a b\]</span> 동일한 면적을 한번은 전체를 한번에 구하고, 두번째는 삼각형 4개와 정사각형 하나로 쪼개 구했기 때문에 두 면적은 같다. 이를 정리하면 피다고라스 정리를 구할 수 있다.</p>
+<p><span class="math display">\[c^2 + 2 a b = (a+b)^2\]</span> 상기 수식을 <span class="math inline">\(c^2\)</span>에 대해 풀면 다음과 같다.</p>
+<p><span class="math display">\[c^2 = (a+b)^2 - 2ab = a^2 + 2ab + b^2 - 2ab = a^2+b^2\]</span></p>
+<div id="geogebra-pythagoras" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> <code>GeoGebra</code></h2>
+<p><a href="https://www.geogebra.org/m/uW9Rcmmj">Pythagorean Theorem Proof #4</a>를 참고한다.</p>
+</div>
+<div id="ggplot-pythagoras" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> <code>ggplot</code></h2>
+<p><code>ggplot</code>을 통해 피타고라스 정리를 애니메이션으로 구현도 가능하다. 자세한 사항은 <a href="https://github.com/notesofdabbler/learn_gganimate"><code>notesofdabbler/learn_gganimate</code></a> 웹사이트를 참고한다.</p>
+<p><img src="fig/pythagoras_theorem.gif" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a><span class="kw">library</span>(gganimate)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a><span class="kw">library</span>(ggthemes)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a><span class="kw">library</span>(transformr)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>df1 =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">0</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">7</span>), <span class="dt">type =</span> <span class="st">&quot;sq&quot;</span>, </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a>             <span class="dt">xt =</span> <span class="kw">c</span>(<span class="fl">2.5</span>, <span class="dv">6</span>, <span class="ot">NA</span>, <span class="ot">NA</span>), <span class="dt">yt =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">1</span>, <span class="ot">NA</span>, <span class="ot">NA</span>), <span class="dt">lbl =</span> <span class="kw">c</span>(<span class="st">&quot;bold(a^2)&quot;</span>, <span class="st">&quot;bold(b^2)&quot;</span>,<span class="ot">NA</span>, <span class="ot">NA</span>))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a>df2 =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>), <span class="dt">type =</span> <span class="st">&quot;tr1&quot;</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a>df3 =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">5</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>), <span class="dt">type =</span> <span class="st">&quot;tr2&quot;</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a>             <span class="dt">xt =</span> <span class="kw">c</span>(<span class="fl">2.5</span>, <span class="fl">2.5</span>, <span class="fl">4.8</span>), <span class="dt">yt =</span> <span class="kw">c</span>(<span class="fl">1.2</span>, <span class="fl">2.2</span>, <span class="fl">1.2</span>), <span class="dt">lbl =</span> <span class="kw">c</span>(<span class="st">&quot;c&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>))</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true"></a>df4 =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">7</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">7</span>), <span class="dt">type =</span> <span class="st">&quot;tr3&quot;</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true"></a>df5 =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">7</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">7</span>, <span class="dv">7</span>), <span class="dt">type =</span> <span class="st">&quot;tr4&quot;</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true"></a>             <span class="dt">xt =</span> <span class="kw">c</span>(<span class="fl">4.8</span>, <span class="dv">6</span>, <span class="dv">6</span>), <span class="dt">yt =</span> <span class="kw">c</span>(<span class="fl">4.7</span>, <span class="fl">6.8</span>, <span class="fl">4.7</span>), <span class="dt">lbl =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>))</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true"></a>df_a1 =<span class="st"> </span><span class="kw">bind_rows</span>(df1, df2, df3, df4, df5) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">state =</span> <span class="st">&quot;a1&quot;</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true"></a>col_list =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#F1CE63&quot;</span>, <span class="st">&quot;#E15759&quot;</span>, <span class="st">&quot;#76B7B2&quot;</span>, <span class="st">&quot;#E15759&quot;</span>, <span class="st">&quot;#76B7B2&quot;</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true"></a>p =<span class="st"> </span><span class="kw">ggplot</span>(df_a1) <span class="op">+</span><span class="st"> </span><span class="kw">geom_polygon</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">group =</span> type, <span class="dt">fill =</span> type))</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true"></a>p =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x =</span> xt, <span class="dt">y =</span> yt, <span class="dt">label =</span> lbl), <span class="dt">parse =</span> <span class="ot">TRUE</span>, <span class="dt">size =</span> <span class="dv">5</span>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true"></a>p =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> col_list) <span class="op">+</span><span class="st"> </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true"></a>p =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">theme_void</span>()</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true"></a>p</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true"></a><span class="co">#&#39; The dataframe for the second state</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true"></a><span class="co">#&#39; and the associated plot is shown below</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true"></a><span class="co">#&#39;</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true"></a><span class="co">#+ </span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true"></a><span class="co"># State - a2</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true"></a>df1_a =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">0</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">7</span>), <span class="dt">type =</span> <span class="st">&quot;sq&quot;</span>)</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true"></a>df5_a =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">7</span>, <span class="dv">7</span>), <span class="dt">type =</span> <span class="st">&quot;tr4&quot;</span>,</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true"></a>               <span class="dt">xt =</span> <span class="kw">c</span>(<span class="fl">0.2</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">yt =</span> <span class="kw">c</span>(<span class="fl">4.7</span>, <span class="fl">6.8</span>, <span class="fl">4.7</span>), <span class="dt">lbl =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>))</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true"></a>df_a2 =<span class="st"> </span><span class="kw">bind_rows</span>(df1_a, df2, df3, df4, df5_a) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">state =</span> <span class="st">&quot;a2&quot;</span>)</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true"></a></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true"></a></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true"></a>p =<span class="st"> </span><span class="kw">ggplot</span>(df_a2) <span class="op">+</span><span class="st"> </span><span class="kw">geom_polygon</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">group =</span> type, <span class="dt">fill =</span> type))</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true"></a>p =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x =</span> xt, <span class="dt">y =</span> yt, <span class="dt">label =</span> lbl), <span class="dt">parse =</span> <span class="ot">TRUE</span>, <span class="dt">size =</span> <span class="dv">5</span>)</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true"></a>p =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> col_list) <span class="op">+</span><span class="st"> </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true"></a>p =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">theme_void</span>()</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true"></a>p</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true"></a></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true"></a><span class="co">#&#39; The dataframe for the third state</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true"></a><span class="co">#&#39; and the associated plot is shown below</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true"></a><span class="co">#&#39;</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true"></a><span class="co">#+</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true"></a><span class="co"># state - a3</span></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true"></a>df4_a =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">7</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">5</span>), <span class="dt">type =</span> <span class="st">&quot;tr3&quot;</span>)</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true"></a>df_a3 =<span class="st"> </span><span class="kw">bind_rows</span>(df1_a, df2, df3, df4_a, df5_a) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">state =</span> <span class="st">&quot;a3&quot;</span>)</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true"></a></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true"></a>p =<span class="st"> </span><span class="kw">ggplot</span>(df_a3) <span class="op">+</span><span class="st"> </span><span class="kw">geom_polygon</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">group =</span> type, <span class="dt">fill =</span> type))</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true"></a>p =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x =</span> xt, <span class="dt">y =</span> yt, <span class="dt">label =</span> lbl), <span class="dt">parse =</span> <span class="ot">TRUE</span>, <span class="dt">size =</span> <span class="dv">5</span>)</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true"></a>p =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> col_list) <span class="op">+</span><span class="st"> </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true"></a>p =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">theme_void</span>()</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true"></a>p</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true"></a></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true"></a><span class="co">#&#39; The dataframe for the fourth state</span></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true"></a><span class="co">#&#39; and the associated plot is shown below</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true"></a><span class="co">#&#39;</span></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true"></a><span class="co">#+ </span></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true"></a><span class="co"># state - a4</span></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true"></a>df1_b =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">0</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">7</span>, <span class="dv">7</span>), <span class="dt">type =</span> <span class="st">&quot;sq&quot;</span>, </span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true"></a>               <span class="dt">xt =</span> <span class="kw">c</span>(<span class="fl">3.5</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>), <span class="dt">yt =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>), <span class="dt">lbl =</span> <span class="kw">c</span>(<span class="st">&quot;bold(c^2)&quot;</span>, <span class="ot">NA</span> ,<span class="ot">NA</span>, <span class="ot">NA</span>))</span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true"></a>df3_a =<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">7</span>, <span class="dv">7</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">5</span>), <span class="dt">type =</span> <span class="st">&quot;tr2&quot;</span>,</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true"></a>               <span class="dt">xt =</span> <span class="kw">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="fl">6.8</span>), <span class="dt">yt =</span> <span class="kw">c</span>(<span class="fl">6.2</span>, <span class="fl">6.8</span>, <span class="fl">6.2</span>), <span class="dt">lbl =</span> <span class="kw">c</span>(<span class="st">&quot;c&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>))</span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true"></a>df_a4 =<span class="st"> </span><span class="kw">bind_rows</span>(df1_b, df2, df3_a, df4_a, df5_a) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">state =</span> <span class="st">&quot;a4&quot;</span>)</span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true"></a></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true"></a>p =<span class="st"> </span><span class="kw">ggplot</span>(df_a4) <span class="op">+</span><span class="st"> </span><span class="kw">geom_polygon</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">group =</span> type, <span class="dt">fill =</span> type))</span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true"></a>p =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x =</span> xt, <span class="dt">y =</span> yt, <span class="dt">label =</span> lbl), <span class="dt">parse =</span> <span class="ot">TRUE</span>, <span class="dt">size =</span> <span class="dv">5</span>)</span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true"></a>p =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> col_list) <span class="op">+</span><span class="st"> </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true"></a>p =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">theme_void</span>()</span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true"></a>p</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true"></a></span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true"></a><span class="co">#&#39; Now the dataframes for the 4 states are combined into a single dataframe</span></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true"></a><span class="co">#&#39; and gganimate is used to transition between states to construct the animation</span></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true"></a></span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true"></a><span class="co">#+ </span></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true"></a><span class="co"># combining the dataframe into a single dataframe for animation</span></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true"></a>df =<span class="st"> </span><span class="kw">bind_rows</span>(df_a1, df_a2, df_a3, df_a4)</span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true"></a></span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true"></a>p =<span class="st"> </span><span class="kw">ggplot</span>(df) <span class="op">+</span><span class="st"> </span><span class="kw">geom_polygon</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">group =</span> type, <span class="dt">fill =</span> type))</span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true"></a>p =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x =</span> xt, <span class="dt">y =</span> yt, <span class="dt">label =</span> lbl), <span class="dt">parse =</span> <span class="ot">TRUE</span>, <span class="dt">size =</span> <span class="dv">5</span>)</span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true"></a>p =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> col_list) <span class="op">+</span><span class="st"> </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true"></a>p =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">theme_void</span>()</span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true"></a></span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true"></a>anim =<span class="st"> </span>p <span class="op">+</span><span class="st"> </span><span class="kw">transition_states</span>(state, <span class="dt">transition_length =</span> <span class="dv">1</span>, <span class="dt">state_length =</span> <span class="dv">2</span>, <span class="dt">wrap =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true"></a><span class="kw">animate</span>(anim, <span class="dt">renderer =</span> <span class="kw">gifski_renderer</span>(<span class="st">&quot;figures/pythagoras_theorem.gif&quot;</span>))</span></code></pre></div>
+</div>
+</div>
+<div id="greek-irrational-number" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> 반증법: <span class="math inline">\(\sqrt{2}\)</span> 무리수</h1>
+<p><strong>반증법(proof by contradition)</strong> 혹은 귀류법은 간접증명법으로 어떤 주장에 대해 그 함의하는 내용을 따라가다보면 이치에 닿지 않는 내용 또는 결론에 이르게 된다는 것을 보여서 그 주장이 잘못된 것임을 보이는 것이다.</p>
+<p><span class="math inline">\(x^2 = 2\)</span>, 즉 <span class="math inline">\(x = \sqrt{2}\)</span>가 유리수가 아닌 무리수임을 증명하자.</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(x\)</span> 가 유리수라고 가정한다. 즉, <span class="math inline">\(x = \frac{p}{q}\)</span> 로 둔다. 여기서 <span class="math inline">\(p, q\)</span>는 서로 서로소인 자연수라서 최대공약수가 1 이다. 이를 <span class="math inline">\(gcd(p,q) = 1\)</span>이라고 한다.</li>
+<li>유리수로 가정했기 때문에 <span class="math inline">\(\sqrt{2} = \frac{p}{q}\)</span> 이 성립하고 양변을 제곱하면 <span class="math inline">\(2 = \frac{p^2}{q^2}\)</span> 이 된다. 따라서, <span class="math inline">\(2q^2 = p^2\)</span>이 되어 <span class="math inline">\(p\)</span>는 2의 배수 짝수가 된다.</li>
+<li><span class="math inline">\(p\)</span>가 2의 배수 짝수이기 때문에 <span class="math inline">\(p = 2k\)</span>와 같이 표현할 수 있다. 이를 통해 <span class="math inline">\((2k)^2 = 2q^2\)</span>이 되고 이를 <span class="math inline">\(q\)</span>에 대해 정리하면 <span class="math inline">\(q^2 = 2 k^2\)</span>이 된다. 즉, <span class="math inline">\(q\)</span>도 2의 배수 짝수가 된다.</li>
+<li>하지만, <span class="math inline">\(p, g\)</span>는 서로소이기 때문에 서로 공약수를 갖고 있지 않다고 했지만, <span class="math inline">\(p, g\)</span>는 최소 2를 공약수로 갖는 관계가 성립되어 모순이 발생되어 <span class="math inline">\(x^2 = 2\)</span>, 즉 <span class="math inline">\(x = \sqrt{2}\)</span>는 유리수가 되지 못한다.</li>
+</ol>
 <div id="refs" class="references">
 <div id="ref-hollingdale2006makers">
 <p>1. Hollingdale S. Makers of mathematics. Courier Corporation; 2006.</p>
