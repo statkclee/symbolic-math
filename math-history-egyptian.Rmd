@@ -1,0 +1,104 @@
+---
+layout: page
+title: "기호 수학(Symbolic Math) "
+subtitle: "고대 이집트 - 곱셈과 나눗셈"
+author:
+- name: "이광춘"
+  affiliation: "[Tidyverse Korea](https://www.facebook.com/groups/tidyverse/)"
+tags: ["데이터 과학", "Data Science", "데이터 사이언스", "수능", "수학능력시험", "EBS", "수학", "수학교육과정", "geogebra", "이집트", "곱셈", "나눗셈"]
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    include:
+      after_body: footer.html
+      before_body: header.html
+    theme: default
+    toc: yes
+    toc_depth: 2
+    toc_float: true
+    highlight: tango
+    code_folding: show
+    number_section: true
+    self_contained: false
+editor_options: 
+  chunk_output_type: console
+bibliography: bibliography-sm.bib
+csl: biomed-central.csl
+---
+
+```{r setup2, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE,
+                      comment="", digits = 3, tidy = FALSE, prompt = FALSE, fig.align = 'center')
+
+library(reticulate)
+```
+
+# 곱셈 [^history-of-math] {#egyptian-method-multiplication}
+
+[^history-of-math]: [Dr. Tom McNamara, "History of Mathematics", Youtube](https://www.youtube.com/watch?v=RyuuYJ4iGKU&list=PLBevhpjdlMgnOIMqZwyNmQMi_5hzI3oQK)
+
+$29 \times 13 = 377$ 이 자명한데 이를 고대 이집트 사람들은 어떻게 계산했는지 살펴보자. [@hollingdale2006makers]
+
+$$
+\begin{array}{rcc}
+1 & 29 & \leftarrow \\
+2 & 58 & \\
+4 & 116 & \leftarrow \\
+8 & 232 & \leftarrow \\
+\hline 
+13 & 377 &
+\end{array}
+$$
+
+-  $1 \times 29 = 29$
+-  $2 \times 29 = 58$
+-  $4 \times 29 = 116$
+-  $8 \times 29 = 232$
+
+1에서부터 순차적으로 $2^x$ 만큼 곱하면서 늘려나가는데 $16=2^4$은 13보다 크기 때문에 $2^3 = 8$에서 정지한다.
+그리고 나서 13을 만들 수 있는 수를 앞에서 찾아낸다. 이 경우 $13 = 1 + 4 + 8$로 구성되기 때문에 해당 숫자를 모두 더해서 총 합을 구한다. 즉, $29 + 116 + 232 = 377$ 이 된다.
+
+인수분해를 하면 다음과 같다.
+
+$$13 \times 29 = (1+2+8) \times 29 = 377$$
+R 코드로 작성하면 두 수의 곱셈은 다음과 같이 구할 수 있다.
+
+```{r egyptian-multiplication}
+29 * 13
+```
+
+# 나눗셈 {#egyption-division}
+
+$ 342 \div 17 = 20 + \frac{2}{17}$이 되는데 어떻게 고대 이집트 사람들이 계산했는지 들여다 보자.
+
+
+$$
+\begin{array}{rcc}
+1  & 17 &  \\
+2  & 34 &  \\
+4  & 68 &  \leftarrow \\
+8  & 136 & \\
+16 & 272 & \leftarrow \\
+\hline 
+& 272 + 68 = 340
+\end{array}
+$$
+$2^0 = 1$부터 시작해서 계속 $2$를 곱해 나가는데 $272 \times 2 = 544$ 라서, 342를 넘어가니 멈춘다.
+이것을 정리하면 다음과 같다.
+
+$$
+\begin{array}{lll}
+\frac{342}{17} & = & 20 + \frac{2}{17} \\
+               & = & 20 + \frac{1}{17} + \frac{1}{17} \leftarrow  \\ 
+               & = & 20 + \frac{1}{17} + \frac{1}{18} + \frac{1}{17\times18}\\
+               & = & 20 + \frac{1}{17} + \frac{1}{18} + \frac{1}{306} 
+\end{array}
+$$
+$\frac{2}{17} = \frac{1}{17} + \frac{1}{17} $와 같은데 **쪼개기 알고리즘(Splitting Algorithm)**을 사용해서 나머지를 계속해서 쪼개는 특징이 있다. 나머지를 쪼개는 알고리즘은 다음과 같다.
+
+
+$$\frac{1}{n} = \frac{n+1}{n(n+1)} = \frac{1}{n+1} + \frac{1}{n(n+1)}$$
+
+
+
+

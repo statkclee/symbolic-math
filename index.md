@@ -7,6 +7,7 @@ title: 기호 수학(Symbolic Math)
 ## 학습 목차
 
 1. [수학의 역사](01-math-history.html)
+    1. [고대 이집트 - 곱셈과 나눗셈](math-history-egyptian.html)
 1. [심파이 설치](02-sympy-install.html) [^sympy-tutorial]
 
 [^sympy-tutorial]: [SymPy Tutorial](http://docs.sympy.org/latest/tutorial/)    
