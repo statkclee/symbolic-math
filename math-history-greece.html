@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2021-02-08" />
+<meta name="date" content="2021-02-09" />
 
 <title>기호 수학(Symbolic Math)</title>
 
@@ -385,7 +385,7 @@ div.tocify {
 <h3 class="subtitle">그리스 수학</h3>
 <h4 class="author">이광춘</h4>
 <address class="author_afil">
-<a href="https://www.facebook.com/groups/tidyverse/">Tidyverse Korea</a><br><h4 class="date">2021-02-08</h4>
+<a href="https://www.facebook.com/groups/tidyverse/">Tidyverse Korea</a><br><h4 class="date">2021-02-09</h4>
 
 </div>
 
@@ -451,7 +451,7 @@ div.tocify {
 </div>
 </div>
 <div id="pythagoras-theorem" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> 피타고라스 정리</h1>
+<h1 number="2"><span class="header-section-number">2</span> 피타고라스 정리<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></h1>
 <p><strong>피타고라스 정리(Pythagoras Theorem)</strong>는 직각 삼각형의 두 직각변 <span class="math inline">\(a,b\)</span>를 각각 한 변으로 하는 정사각형 면적의 합은 빗변 <span class="math inline">\(c\)</span>를 한 변으로 하는 정사각형의 면적과 같다는 정리다. 수식으로 표현하면 다음과 같다.</p>
 <p><span class="math display">\[a^2 + b^2 = c^2\]</span></p>
 <p><a href="https://ko.wikipedia.org/wiki/%ED%94%BC%ED%83%80%EA%B3%A0%EB%9D%BC%EC%8A%A4_%EC%A0%95%EB%A6%AC">피타고라스 정리 증명</a>은 수도 없이 많지만 위키에 나와 있는 유클리드 증명, 대수적 증명, 삼각형의 닮음을 통한 증명, 미국 대통령 가필드 증명 등이 있다. 여기서 대수적 증명을 살펴보자.</p>
@@ -567,9 +567,45 @@ div.tocify {
 <li><span class="math inline">\(p\)</span>가 2의 배수 짝수이기 때문에 <span class="math inline">\(p = 2k\)</span>와 같이 표현할 수 있다. 이를 통해 <span class="math inline">\((2k)^2 = 2q^2\)</span>이 되고 이를 <span class="math inline">\(q\)</span>에 대해 정리하면 <span class="math inline">\(q^2 = 2 k^2\)</span>이 된다. 즉, <span class="math inline">\(q\)</span>도 2의 배수 짝수가 된다.</li>
 <li>하지만, <span class="math inline">\(p, g\)</span>는 서로소이기 때문에 서로 공약수를 갖고 있지 않다고 했지만, <span class="math inline">\(p, g\)</span>는 최소 2를 공약수로 갖는 관계가 성립되어 모순이 발생되어 <span class="math inline">\(x^2 = 2\)</span>, 즉 <span class="math inline">\(x = \sqrt{2}\)</span>는 유리수가 되지 못한다.</li>
 </ol>
+</div>
+<div id="rulers-compass" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> 자와 콤파스</h1>
+<p>고대 그리스는 직선을 긎는 자와 원을 그리는 콤파스를 활용해서 기본적인 연산과 제곱근을 도형을 활용해서 제작할 수 있었다.</p>
+<div id="rulers-addition" class="section level2" number="4.1">
+<h2 number="4.1"><span class="header-section-number">4.1</span> 덧셈</h2>
+<p>즉, 선분 AB = 3, 선분 CD = 2 이것을 더했을 때 선분 AB + 선분 CD = 선분 EF 가 된다.</p>
+<p><span class="math inline">\(\overline{AB} + \overline{CD} = \overline{EF}\)</span> <span class="math inline">\(2 + 3 = 5\)</span></p>
+<iframe src="https://www.geogebra.org/calculator/dwcqzryj?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0">
+</iframe>
+</div>
+<div id="rulers-multiplication" class="section level2" number="4.2">
+<h2 number="4.2"><span class="header-section-number">4.2</span> 곱셈</h2>
+<p>삼각형을 이용한 곱셈과 나눗셈은 다음과 같다.</p>
+<ol style="list-style-type: decimal">
+<li>한변의 길이가 1인 삼각형을 그린다.</li>
+<li>다른 한변과 평행한 선을 갖는 삼각형을 쭉 늘린다.</li>
+<li>삼각형의 성질을 이용하여 다음과 같이 <span class="math inline">\(x\)</span>를 구할 수 있다.</li>
+</ol>
+<p><span class="math display">\[\frac{p}{1} = \frac{x}{q}\]</span> <span class="math display">\[x = p \times q\]</span></p>
+<iframe src="https://www.geogebra.org/calculator/rnkmqr5p?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0">
+</iframe>
+</div>
+<div id="rulers-square-roots" class="section level2" number="4.3">
+<h2 number="4.3"><span class="header-section-number">4.3</span> 제곱근</h2>
+<p>자와 콤파스를 이용하여 제곱근도 구할 수 있다.</p>
+<ol style="list-style-type: decimal">
+<li>길이 1을 갖는 직선을 그린다.</li>
+<li><span class="math inline">\(p\)</span> 까지 길이를 늘린다.</li>
+<li><span class="math inline">\(p\)</span>까지 늘린 반지름을 갖는 반원을 그린다.</li>
+<li>길이 1인 직선에서 직각을 이루는 선분을 반원에 닿는 곳까지 연결하고 연결하여 삼각형을 완성한다.</li>
+</ol>
+<p><span class="math display">\[\frac{1}{x} = \frac{x}{p}\]</span> <span class="math display">\[x = \sqrt{p}\]</span></p>
+<iframe src="https://www.geogebra.org/calculator/bncpwxhj?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0">
+</iframe>
 <div id="refs" class="references">
 <div id="ref-hollingdale2006makers">
 <p>1. Hollingdale S. Makers of mathematics. Courier Corporation; 2006.</p>
+</div>
 </div>
 </div>
 </div>
@@ -577,6 +613,7 @@ div.tocify {
 <hr />
 <ol>
 <li id="fn1"><p><a href="https://www.youtube.com/watch?v=RyuuYJ4iGKU&amp;list=PLBevhpjdlMgnOIMqZwyNmQMi_5hzI3oQK">Dr. Tom McNamara, “History of Mathematics”, Youtube</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p><a href="http://www.cut-the-knot.org/pythagoras/">Cut the Knot, “Pythagorean Theorem”</a><a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
