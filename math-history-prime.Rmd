@@ -1,0 +1,82 @@
+---
+layout: page
+title: "기호 수학(Symbolic Math) "
+subtitle: "소수(Prime Number)"
+author:
+- name: "이광춘"
+  affiliation: "[Tidyverse Korea](https://www.facebook.com/groups/tidyverse/)"
+tags: ["데이터 과학", "Data Science", "데이터 사이언스", "수능", "수학능력시험", "EBS", "수학", "수학교육과정", "geogebra", "그리스", "추상화", "연역법", "귀납법", "기하학", "소수"]
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    include:
+      after_body: footer.html
+      before_body: header.html
+    theme: default
+    toc: yes
+    toc_depth: 2
+    toc_float: true
+    highlight: tango
+    code_folding: show
+    number_section: true
+    self_contained: false
+editor_options: 
+  chunk_output_type: console
+bibliography: bibliography-sm.bib
+csl: biomed-central.csl
+---
+
+```{r setup2, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE,
+                      comment="", digits = 3, tidy = FALSE, prompt = FALSE, fig.align = 'center')
+
+library(reticulate)
+```
+
+# 소수의 중요성 [^prime-number] {#factorization}
+
+[^prime-number]: [소인수 분해](https://calculus-book.netlify.app/prime-factorization.html)
+
+소수는 그리스 시대부터 본인과 1로만 나눠줘서 절대 깨지지 않는 합성수와 다른 완전성 때문에 큰 관심을 갖게 되었다. 즉, 합성수는 소수의 곱으로 인수분해를 통해 구할 수 있기 때문에 소수를 알게 되면 모든 숫자를 이해하게 되는 것이라 여겨졌다. 소수는 수(자연수)의 근원이다.
+
+정수론 혹은 수론(Number Theory)에서 소수는 중요한 의미를 갖는다. 역사적으로 중요한 소수에 대한 상식적인 내용은 다음과 같다.
+
+- [에라토스테네스의 체](https://ko.wikipedia.org/wiki/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98_%EC%B2%B4): 고대 그리스 수학자 에라토스테네스가 발견한 소수를 찾는 방법
+- [가우수 소수 정리(Prime number theorem)](https://ko.wikipedia.org/wiki/%EC%86%8C%EC%88%98_%EC%A0%95%EB%A6%AC): 소수의 분포를 근사적으로 기술하는 정리로 어떤 큰 수 $\displaystyle N$ 에 가까운 정수 하나를 무작위로 골랐을 때 그 정수가 소수일 확률은 $\displaystyle \frac {1}{\ln N}$ 에 근사한다는 것을 보여 준다. 달리 표현하면, 어떤 양수 이하의 소수가 몇 개나 있는지 그 값을 어림해주는 정리다. 어떤 양수 $x$에 대해 $x$보다 작은 소수의 개수는 대략 $\frac{x}{\log x}$개가 있다고 주장하는 정리이다.
+- [리만 가설](https://ko.wikipedia.org/wiki/%EB%A6%AC%EB%A7%8C_%EA%B0%80%EC%84%A4): 리만은 1859년 "주어진 수보다 작은 소수의 개수에 관하여" 라는 제목의 논문을 출간하였다. 논문은 임의의 양의 정수 N이 아주 클 경우 N까지의 소수의 수가 로그 적분 함수에 점근한다는 가설을 고찰하였다. 이를 위해서 오일러가 제시한 **제타함수**를 사용하였다. 
+
+$$Li(N) = \int_{0}^{N} {\frac{1}{\log x}}dx$$
+
+# 가우스 소수 정리 {#gauss-theorem}
+
+어떤 양수 $x$에 대해 $x$보다 작은 소수의 개수는 대략 $\frac{x}{\log x}$개가 있다는 것을 표로 정리하면 다음과 같다. 즉, 1~10 사이는 2,3,5,7 소수가 4개 1~100 사이는 25개 ... 와 같이 정리된다.
+
+```{r prime-number-theorem}
+library(tidyverse)
+library(rvest)
+
+prime_number_theorem_url <- "https://en.wikipedia.org/wiki/Prime_number_theorem"
+
+Sys.setlocale("LC_ALL", locale = "C")
+
+gauss_tbl <- prime_number_theorem_url %>% 
+  read_html(encoding = "UTF-8") %>% 
+  html_nodes(xpath = '//*[@id="mw-content-text"]/div[1]/dl[53]/dd/table') %>% 
+  html_table(fill = TRUE, header = TRUE) %>% 
+  .[[1]] %>% 
+  select(1,2,4)
+
+Sys.setlocale("LC_ALL", locale = "Korean")
+
+gauss_tbl %>% 
+  as_tibble() %>% 
+  mutate(x = as.character(x)) %>% 
+  mutate(power = str_remove(x, pattern = "10")) %>% 
+  mutate(power = ifelse(power > 0, power, 1) %>%  as.integer) %>% 
+  mutate(x = 10 ** power) %>% 
+  reactable::reactable()
+```
+
+# 소수는 무한하다. {#proof-prime-number}
+
+# 소수의 갯수 {#count-prime-number}

@@ -9,6 +9,7 @@ title: 기호 수학(Symbolic Math)
 1. [수학의 역사](01-math-history.html)
     1. [고대 이집트 - 곱셈과 나눗셈](math-history-egyptian.html)
     2. [그리스 수학](math-history-greece.html)
+    2. [소수(Prime Number)](math-history-prime.html)
 1. [심파이 설치](02-sympy-install.html) [^sympy-tutorial]
 
 [^sympy-tutorial]: [SymPy Tutorial](http://docs.sympy.org/latest/tutorial/)    
