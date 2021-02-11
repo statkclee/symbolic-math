@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+<meta name="date" content="2021-02-12" />
+
+<title>기호 수학(Symbolic Math)</title>
+
+<script src="math-history-gcd_files/header-attrs-2.6/header-attrs.js"></script>
+<script src="math-history-gcd_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="math-history-gcd_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="math-history-gcd_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="math-history-gcd_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="math-history-gcd_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="math-history-gcd_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="math-history-gcd_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="math-history-gcd_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="math-history-gcd_files/navigation-1.1/tabsets.js"></script>
+<script src="math-history-gcd_files/navigation-1.1/codefolding.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+<!-- <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" /> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-theme.css" />
+<link rel="stylesheet" type="text/css" href="css/swc.css" />  -->
+<link rel="alternate" type="application/rss+xml" title="Tidyverse Korea" href="https://www.facebook.com/groups/tidyverse/"/>
+<meta charset="UTF-8" />
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+  <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-59802572-23"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-59802572-23');
+</script>
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">기호 수학(Symbolic Math)</h1>
+<h3 class="subtitle">최대공약수</h3>
+<h4 class="author">이광춘</h4>
+<address class="author_afil">
+<a href="https://www.facebook.com/groups/tidyverse/">Tidyverse Korea</a><br><h4 class="date">2021-02-12</h4>
+
+</div>
+
+
+<div id="gcd" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> 최대공약수</h1>
+<p><strong>최대공약수(GCD, Greatest Common Divisor)</strong>는 공약수 가운데 가장 큰 수다. 예를 들어, 두 자연수 <span class="math inline">\(n\)</span>, <span class="math inline">\(m\)</span>이 있다고 가정하고 두 수의 최대공약수를 찾아보자. 먼저, 두수를 소인수 분해를 하여 나타낸다. 두 수를 곱했을 때 각 소수별 가장 작은 승수를 찾아 조합하면 된다.</p>
+<ul>
+<li><span class="math inline">\(n = p_1^{e_1} p_2^{e_2} \cdots p_t^{e_t}\)</span></li>
+<li><span class="math inline">\(m = p_1^{f_1} p_2^{f_2} \cdots p_t^{f_t}\)</span></li>
+<li><span class="math inline">\(\gcd\{n,m\} = p_1^{\min\{e_1,f_1\}} p_2^{\min\{e_2,f_2\}} \cdots p_t^{\min\{e_t,f_t\}}\)</span></li>
+</ul>
+<p>추가로, 최대공약수와 최소공배수는 다음 관계를 갖는다.</p>
+<p><span class="math display">\[\gcd\{n,m\} = \frac{n \times m}{\operatorname{lcm}\{n,m\}}\]</span> 두 수 192와 72의 최대공약수를 소인수 분해 방법을 통해 구해보자.</p>
+<ul>
+<li><span class="math inline">\(192 = 2^6 \times 3^1\)</span></li>
+<li><span class="math inline">\(72 = 2^3 \times 3^2\)</span></li>
+<li><span class="math inline">\(\gcd\{192, 72\} = 2^{\min\{6, 3\}} \times 3^{\min\{1, 2\}} = 2^3 \times 3^1 = 8 \times 3 = 24\)</span></li>
+</ul>
+<div id="euclid-method" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> 유클리드 호제법</h2>
+<p>소인수 분해 방법 말고 <strong>유클리드 호제법(Euclidean algorithm)</strong>을 사용해서 똑같이 두 수 192와 72의 최대공약수를구하여 보자. 유클리드 알고리즘은 2개의 자연수 또는 정식(整式)의 최대공약수를 구하는 알고리즘의 하나이다. 먼저 두 수 중에서 작은 수로 큰 수를 나눈다.</p>
+<ol style="list-style-type: decimal">
+<li>일단 192을 72로 나누어 나머지를 구한다. 이는 192을 72로 나누어 나온 나머지가 48라는 것을 의미한다.
+<ul>
+<li><span class="math inline">\(192 = 72 \times 2 + 48\)</span></li>
+</ul></li>
+<li>이번에는 72을 나머지인 48로 나눈다.
+<ul>
+<li><span class="math inline">\(72 = 48 \times 1 + 24\)</span></li>
+</ul></li>
+<li>이와 같은 연산을 나머지가 0이 될 때까지 반복한다.
+<ul>
+<li><span class="math inline">\(48 = 24 \times 2 + 0\)</span></li>
+</ul></li>
+<li>나머지가 0이 되었으므로 연산을 중지한다. 이때, 나머지가 0이 되기 바로 직전의 연산에서의 나머지가 원래 두 수의 최대공약수가 된다. 즉, 24가 두 수 192와 72의 최대공약수가 된다.</li>
+</ol>
+<p>상기 알고리즘을 R코드로 작성하면 다음과 같다.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a>euclid_gcd &lt;-<span class="st"> </span><span class="cf">function</span>(n, m) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a>  <span class="cf">if</span>(n <span class="op">&lt;</span><span class="st"> </span>m) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>    <span class="kw">stop</span>(<span class="st">&quot;n, m 두 숫자 순서를 바꿔 입력하세요.&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  }</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>  <span class="cf">while</span>(m <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) {</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a>    temp &lt;-<span class="st"> </span>m</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a>    m &lt;-<span class="st"> </span>n <span class="op">%%</span><span class="st"> </span>m</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>    n &lt;-<span class="st"> </span>temp</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a>  }</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>  <span class="kw">return</span>(n)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a>}</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="co"># gcd(72, 192)</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="co"># Error in gcd(72, 192) : n, m 두 숫자 순서를 바꿔 입력하세요.</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a><span class="kw">euclid_gcd</span>(<span class="dv">192</span>, <span class="dv">72</span>)</span></code></pre></div>
+<pre><code>[1] 24</code></pre>
+<p><code>numbers</code> 팩키지 <code>extGCD()</code> 함수는 확장된 유클리드 알고리즘으로 최대공약수를 계산할 뿐만 아니라 최대공약수를 두수를 선형결합으로 표현할 수 있게 해준다. 즉, <span class="math inline">\(a, b\)</span>는 최대공약수를 구하게 되면 2원 1차 연립방정식을 세울 수 있어 쉽게 구할 수 있다.</p>
+<ul>
+<li><span class="math inline">\(\gcd\{n,m\} = a \times n + b \times m\)</span></li>
+<li><span class="math inline">\(24 = (-1) * 192 + 3 * 72\)</span></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">library</span>(numbers)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>numbers<span class="op">::</span><span class="kw">extGCD</span>(<span class="dv">192</span>, <span class="dv">72</span>)</span></code></pre></div>
+<pre><code>[1] 24 -1  3</code></pre>
+</div>
+</div>
+<div id="lcd" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> 최소공배수</h1>
+<p><strong>최소공배수(LCM, Least Common Multiple)</strong>은 양의 공배수 가운데 가장 작은 수를 의미하며, 분수끼리 더하거나 뺄 때 사용되는 통분이 가장 흔히 사용되는 응용으로 볼 수 있다. 통분 과정에서 최소공분모(분모의 최소공배수)를 계산하게 되면 쉽게 통분을 할 수 있다.</p>
+<p><span class="math display">\[\frac{2}{21} + \frac{1}{6} = \frac{4}{42} + \frac{7}{42} = \frac{11}{42}\]</span></p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(21\)</span>, <span class="math inline">\(6\)</span>을 인수분해한다.
+<ul>
+<li><span class="math inline">\(21 = 3 \times 7\)</span></li>
+<li><span class="math inline">\(6 = 2 \times 3\)</span></li>
+</ul></li>
+<li><span class="math inline">\(21\)</span>, <span class="math inline">\(6\)</span>의 최대공약수를 구한다.
+<ul>
+<li><span class="math inline">\(\operatorname{gcd}(21, 6) = 3\)</span></li>
+</ul></li>
+<li>최소공배수를 구한다.
+<ul>
+<li><span class="math inline">\(\operatorname{gcd}(21, 6) \times 2 \times 7 = 42\)</span></li>
+</ul></li>
+</ol>
+<p>여기서, 최대공약수와 최소공배수 다음 성질을 이용한다.</p>
+<ul>
+<li><span class="math inline">\(n = p_1^{e_1} p_2^{e_2} \cdots p_t^{e_t}\)</span></li>
+<li><span class="math inline">\(m = p_1^{f_1} p_2^{f_2} \cdots p_t^{f_t}\)</span></li>
+<li><span class="math inline">\(\gcd\{n,m\} = p_1^{\max\{e_1,f_1\}} p_2^{\max\{e_2,f_2\}} \cdots p_t^{\max\{e_t,f_t\}}\)</span></li>
+</ul>
+<p>최소공배수를 활용한 사례를 알아보자.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>어느 버스 종점에서 신촌역으로 가는 버스는 2분, 시청으로 가는 버스는 3분마다 출발한다고 가정하자. 9시에 동시에 출발했을 때 9시 이후 동시에 다시 출발하는 시간을 구해보자.</p>
+<ul>
+<li>버스: 9시, 9시 2분, 9시 4분, 9시 6분 …</li>
+<li>기차: 9시, 9시 3분, 9시 6분 …</li>
+</ul>
+<p><span class="math inline">\(\text{lcm}(\text{2}, \text{3}) = 6\)</span></p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="http://study.zum.com/book/13678">ZUM 학습백과, “최소공배수의 활용”</a><a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+&nbsp;
+<hr />
+<p style="text-align: center;">데이터 과학자 <a href="https://github.com/statkclee/">이광춘</a> 저작</p>
+<p style="text-align: center;">
+    <span style="color: #808080;"><em>kwangchun.lee.7@gmail.com</em></span>
+</p>
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<!-- Add font awesome icons -->
+<p style="text-align: center;">
+    <a href="https://education.rstudio.com/trainers/people/lee+kwangchun/" class="fa fa-registered"></a>
+    <a href="https://www.facebook.com/groups/tidyverse/" class="fa fa-facebook"></a>
+    <a href="https://www.linkedin.com/in/kwangchunlee/" class="fa fa-linkedin"></a>
+    <a href="https://github.com/statkclee/" class="fa fa-github"></a>
+</p>
+&nbsp;
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
