@@ -1,0 +1,92 @@
+---
+layout: page
+title: "기호 수학(Symbolic Math) "
+subtitle: "아르키메데스 - 실진법(Method of Exhaustion)"
+author:
+- name: "이광춘"
+  affiliation: "[Tidyverse Korea](https://www.facebook.com/groups/tidyverse/)"
+tags: ["데이터 과학", "Data Science", "데이터 사이언스", "수능", "수학능력시험", "EBS", "수학", "수학교육과정", "geogebra", "그리스", "추상화", "연역법", "귀납법", "기하학", "소수", "최대공약수", "실진법", "Method of Exhaustion"]
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    include:
+      after_body: footer.html
+      before_body: header.html
+    theme: default
+    toc: yes
+    toc_depth: 2
+    toc_float: true
+    highlight: tango
+    code_folding: show
+    number_section: true
+    self_contained: false
+editor_options: 
+  chunk_output_type: console
+bibliography: bibliography-sm.bib
+csl: biomed-central.csl
+---
+
+```{r setup2, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE,
+                      comment="", digits = 3, tidy = FALSE, prompt = FALSE, fig.align = 'center')
+
+library(reticulate)
+```
+
+
+# Eudoxus 와 Archimedes {#method-of-exhaustion}
+
+에우독소스(Eudoxus)와 아르키메데스(Archimedes)의 **실진법(Method of Exhaustion)**은 "어떤 양으로부터 절반 이상의 부분을 빼내고, 다시 나머지 부분으로부터 절반 이상의 부분을 빼내는 과정을 계속하면, 결국 나머지는 정해진 적은 양보다 더 적어진다."는 원리를 활용하여 도형의 넓이나 부피에 대한 명제를 귀류법에 의해 증명하는 방법을 말한다. [@NODE07621022]
+
+사실 실진법을 영어로 번역하면 "Method of Exhaustion"인데 솔직히 무슨 말인지 모르겠다. 소진법 혹은 고갈법이라고 번역하는 것이 더 직관적이지 않을까 싶다.
+
+과거 곡선으로 둘러싸인 넓이와 부피를 계산하는 문제는 쉽지 않았지만, 에우독소스(Eudoxus)와 아르키메데스(Archimedes)의 실진법을 사용해서 이를 해결했다. 
+
+아르키메데스는 **"포물선의 구적법(quadrature of parabola)"**에서 오른쪽의 그림과 같이 포물선과 직선으로 둘러싸인 도형의 넓이는 그에 내접하는 삼각형의 넓이에 대해 $\frac{4}{5}$이 된다는 것을 증명하였다. 아르키메데스의 증명 과정을 간략히 소개하면 다음과 같다. **구적법(Quadrature)**은 어떤 물체나 그래프의 면적, 부피, 함수의 정적분 등을 근사하는 방법이다. 
+
+- 포물선을 가로지르는 직선을 한 변으로 하는 내접 삼각형을 그린다.
+- 위와 같이 하여 그린 내접 삼각형에 의해 포물선은 두 구간으로 분할되며 여기에 다시 같은 방법으로 내접 삼각형을 그릴 수 있다.
+- 이렇게 계속하여 내접 삼각형을 그려나가면 오른쪽 아래의 그림과 같이 포물선을 가로지르는 직선에 둘러싸인 도형은 무수히 많은 삼각형으로 분할된다.
+- 최초의 내접 삼각형 넓이를 '1'이라고 하면 전체 삼각형의 넓이는 다음의 공식에 의해 구할 수 있다.
+
+$\sum_{n=0}^\infty 4^{-n} = 1 + 4^{-1} + 4^{-2} + 4^{-3} + \cdots = {4\over 3}$
+
+```{r method-of-exhaustion}
+library(tidyverse)
+library(magick)
+
+method_of_exhaustion <- image_read("fig/Parabolic_Segment_Dissection.png")
+
+img_width <- image_info(method_of_exhaustion) %>% 
+  pull(width)
+img_height <- image_info(method_of_exhaustion) %>% 
+  pull(height)
+
+problem_img <- image_read("fig/Parabolic_segment_and_inscribed_triangle.png")
+
+first_img <- problem_img %>% 
+  image_crop(geometry=glue::glue("{img_width}x{img_height/2}"))
+
+second_img <- problem_img %>% 
+  image_crop(geometry=glue::glue("{img_width}x{img_height/2}+{0}+{10+img_height/2+70}"))
+
+# 이미지 결합
+exhaustion_img <- image_append(image_scale(c(first_img, second_img, method_of_exhaustion), "x300"))
+
+exhaustion_img
+```
+
+상기 3가지 다른 그림을 결합시켜 애니메이션으로 제작한다.
+
+```{r animation-images}
+frames <- image_join(
+  image_resize(first_img, "400x300!"), 
+  image_resize(second_img, "400x300!"), 
+  image_resize(method_of_exhaustion, "400x300!"))
+
+# Turn frames into animation
+animation <- image_animate(frames, fps = 1, optimize = TRUE)
+
+animation
+```
+
