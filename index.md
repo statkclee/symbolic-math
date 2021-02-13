@@ -12,7 +12,8 @@ title: 기호 수학(Symbolic Math)
     1. [소수(Prime Number)](math-history-prime.html)
     1. [최대공약수](math-history-gcd.html)
     1. [아르키메데스 - 실진법(Method of Exhaustion)](math-history-exhaustion.html)
-    1. [기하학](math-history-geometry.html)    
+    1. [기하학](math-history-geometry.html)
+        1. [R마크다운 - 기하 저작](math-history-geometry-md.html)        
 1. [심파이 설치](02-sympy-install.html) [^sympy-tutorial]
 
 [^sympy-tutorial]: [SymPy Tutorial](http://docs.sympy.org/latest/tutorial/)    
