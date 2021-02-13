@@ -235,16 +235,31 @@ ggplot() +
 
 상기 `tikz` $\LaTeX$ 코드 대신 `ggplot`으로 시각화를 해보자.
 `ggforce` 팩키지 `geom_circle()`을 사용한다.
+`geom_arc()`를 사용하여 호도 시각화 시킬 수 있고, 
+`geom_ellipse()`를 사용하게 되면 타원도 그릴 수 있다. 
 
 
 ```{r ggplot-circle}
 library(ggforce)
 
 ggplot() +
+  # 원
   geom_circle(aes(x0 = 0, y0 = 0, r = 2), color = "black") +
-  coord_fixed(ratio = 1) +
-  geom_arc(aes(x0 = 0, y0 = 0, r = 3, start = pi/2, end = pi, color = "red"))
-
-
+  # 호(Arc)
+  geom_arc(aes(x0 = -3, y0 = 0, r = 3, start = pi / 2 , end = - pi ), color = "red", lineend = 'butt', size = 1) +
+  # pi 위치
+  annotate("text", x = 0, y = 3, label = "2 * pi", vjust =  1, size = 5, parse = TRUE) +
+  annotate("text", x = -3, y = 0, label = "3 / 2 * pi", vjust =  1, size = 5, parse = TRUE) +
+  annotate("text", x = 0, y = -3, label = " pi", vjust =  1, size = 5, parse = TRUE)  +
+  # 타원 (ellipse)
+  geom_ellipse(aes(x0 = 3, y0 = 3, a = 3, b = 1, angle = 0), color = "blue") +
+  theme_classic() +
+  coord_equal(ratio = 1) +
+  scale_x_continuous(limits = c(-6, 6), breaks = seq(-6, 6, 1)) +
+  scale_y_continuous(limits = c(-6, 6), breaks = seq(-6, 6, 1)) +
+  labs(x = "x 축", 
+       y = "y 축") +
+  geom_hline(yintercept = 0) + 
+  geom_vline(xintercept = 0)  
 ```
 
